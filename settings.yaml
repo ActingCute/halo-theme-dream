@@ -504,6 +504,26 @@ comment:
           label: 开启
         - value: false
           label: 关闭
+honorofkings:
+  label: 王者荣耀模块
+  items:
+    honorofkings_is_show:
+      name: honorofkings_is_show
+      label: 是否开启
+      type: radio
+      default: none
+      options:
+        - value: block
+          label: 开启
+        - value: none
+          label: 关闭
+    honorofkings_api:
+       name: honorofkings_api
+       label: "honorofkings_api"
+       type: text
+       default: https://haibarai.com/timi
+       placeholder: 请输入API地址，默认 https://haibarai.com/timi。
+       description: "后台地址，用于获取数据，处理数据"
 profile:
   label: 信息模块
   items:
@@ -1496,3 +1516,5 @@ custom:
       type: textarea
       placeholder: JS代码内容
       description: "填入JS代码，无需script标签，将插入body标签尾部。"
+
+

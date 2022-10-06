@@ -47,5 +47,6 @@
     "webpack-stream": "^7.0.0"
   },
   "dependencies": {
+    "axios": "^0.27.2"
   }
 }

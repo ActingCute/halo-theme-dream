@@ -159,6 +159,8 @@ $(document).on("pjax:success", async function (event, data, status, xhr, options
     window.postPjax && window.postPjax(serialNumber);
     /* 初始化相册界面 */
     window.photoPjax && window.photoPjax(serialNumber);
+    /* 初始化王者荣耀界面 */
+    window.honorofkingsPjax && window.honorofkingsPjax(serialNumber);
     /* 加载主动推送或统计脚本 */
     commonContext.loadMaintain();
     window.DProgress && DProgress.done()

@@ -43,6 +43,13 @@
     <script defer src="${theme_base!}/source/lib/aplayer@1.10.1/APlayer.min.js"></script>
     <script defer src="${theme_base!}/source/lib/meting@2.0.1/Meting.min.js"></script>
 </#if>
+
+<#if settings.honorofkings_is_show?? && settings.honorofkings_is_show != 'none'>
+    <script   defer src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0/axios.min.js"></script>
+    <script   defer src="${theme_base!}/source/js/honorofkings.min.js"></script>
+</#if>
+
+
 <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 ${settings.external_js_body!}
