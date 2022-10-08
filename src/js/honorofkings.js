@@ -13,10 +13,18 @@ const initHonorofkingsVue = function () {
   honorofkingsVue = new Vue({
     el: '#honorofkings',
     data: {
+      roleData: [], //大区
+      loginData: { //登陆参数
+        loginType: 0, //wx qq
+        code: 0, //大区
+        equipment: 0 //安卓 ios
+      },
+      viewRole: false,
       roleWx: [], //微信大区
       roleQQ: [], //qq大区
       isLogin: false,
       isLoading: true,
+      loading: false,
       queryParams: { //分页信息
         start: 0,
         limit: 15,
@@ -42,6 +50,73 @@ const initHonorofkingsVue = function () {
     created() {},
     mounted() {},
     methods: {
+
+      syncData() {
+        if (this.loading) {
+          alert('请稍后')
+          return;
+        }
+        //更新数据
+        if (this.loginData.loginType && this.loginData.equipment && this.loginData.code) {
+          let loginData = JSON.parse(JSON.stringify(this.loginData))
+          loginData = { //登陆参数
+            loginType: Number(loginData.loginType), //wx qq
+            code: Number(loginData.code), //大区
+            equipment: Number(loginData.equipment) //安卓 ios
+          }
+          axios.post('/record/login', loginData).then(res => {
+            if (res.status == 200 && res.data.Code == 10000) {
+              console.log("res==", res);
+              alert("请在30秒内完成扫码");
+              const imgPath = (honorofkings_api + res.data.Data.data).replace("//public", "/public");
+              console.log({
+                imgPath
+              });
+              window.open(imgPath)
+            } else {
+              console.error(res);
+              alert('操作失败')
+              this.loading = false;
+            }
+            this.loading = false;
+          }).catch(e => {
+            this.loading = false;
+            alert('操作失败')
+            console.error(e);
+          })
+        } else {
+          alert('请完成选择')
+        }
+      },
+
+      setRole() {
+        if (this.loginData.loginType && this.loginData.equipment) {
+          let ck = "weixin"
+          let sk = "ios"
+
+          let roleData = this.roleWx;
+
+          if (this.loginData.loginType == 2) {
+            ck = "qq"
+            roleData = this.roleQQ;
+          }
+
+          if (this.loginData.equipment > 2) {
+            sk = "android"
+          }
+
+          //微信
+          this.roleData = roleData.filter(item => (item.ck == ck && item.sk == sk))
+        }
+      },
+      toViewRole(view) {
+        if (view) {
+          $("#modal").css('dispaly', "block")
+        } else {
+          $("#modal").css('dispaly', "none")
+        }
+        this.viewRole = view;
+      },
       //初始化数据
       init() {
         console.log('init');
