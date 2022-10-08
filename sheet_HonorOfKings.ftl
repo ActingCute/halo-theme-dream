@@ -24,11 +24,6 @@
           cursor: pointer;
         }
 
-        .column-left {
-          top: 0 !important;
-          /*不知道为啥会多一个top*/
-        }
-
         .his_info_m {
           position: relative;
         }

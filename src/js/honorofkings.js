@@ -13,6 +13,7 @@ const initHonorofkingsVue = function () {
   honorofkingsVue = new Vue({
     el: '#honorofkings',
     data: {
+      show: false,
       roleData: [], //大区
       loginData: { //登陆参数
         loginType: 0, //wx qq
@@ -47,7 +48,9 @@ const initHonorofkingsVue = function () {
       honorofkingsContents: [],
       isEnd: false //全部加载
     },
-    created() {},
+    created() {
+      this.show = true;
+    },
     mounted() {},
     methods: {
 
