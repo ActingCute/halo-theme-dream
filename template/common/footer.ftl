@@ -15,7 +15,7 @@
                 <p>&copy; ${.now?string('yyyy')} ${user.nickname!} Powered by <a class="powered"
                                                                                  href="https://halo.run/"
                                                                                  target="_blank">Halo</a> & <a
-                            class="powered" href="https://github.com/nineya/halo-theme-dream" target="_blank">Dream</a>
+                            class="powered" href="https://github.com/ActingCute/halo-theme-dream" target="_blank">Dream</a>
                 </p>
                 <#if settings.record_number?? && settings.record_number!=''>
                     <p><a href="http://beian.miit.gov.cn/publish/query/indexFirst.action"
