@@ -1,5 +1,5 @@
 var honorofkingsVue = null;
-var honorofkings_api = $('#honorofkings_api').val() || 'https://haibarai.com/timi';
+var honorofkings_api = $('#honorofkings_api').val() || '/timi';
 
 axios.defaults.baseURL = honorofkings_api;
 

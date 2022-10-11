@@ -46,7 +46,7 @@
 
 <#if settings.honorofkings_is_show?? && settings.honorofkings_is_show != 'none'>
     <script   defer src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0/axios.min.js"></script>
-    <script   defer src="${theme_base!}/source/js/honorofkings.min.js"></script>
+    <script   defer src="${theme_base!}/source/js/honorofkings.min.js?mew=${theme_version!}"></script>
 </#if>
 
 
