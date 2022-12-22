@@ -2,8 +2,8 @@
  * @Author: zhanghui rem486@qq.com
  * @Date: 2022-12-22 11:53:20
  * @LastEditors: zhanghui rem486@qq.com
- * @LastEditTime: 2022-12-22 12:06:14
- * @FilePath: \halo-theme-dream\src\js\bilibili.js
+ * @LastEditTime: 2022-12-22 14:54:24
+ * @FilePath: \halo-theme-dream\src\js\fan.js
  * @Description: 说明
  */
 var bilibiliVue = null;
