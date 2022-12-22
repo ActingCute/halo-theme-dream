@@ -525,7 +525,7 @@ honorofkings:
       placeholder: 请输入API地址，默认 https://haibarai.com/timi。
       description: "后台地址，用于获取数据，处理数据"
 bilibili:
-  label: 王者荣耀模块
+  label: 追番模块
   items:
     bilibili_is_show:
       name: bilibili_is_show
