@@ -20,7 +20,7 @@
 </#if>
 
 <script src="${theme_base!}/source/js/mew-custom.min.js?mew=${theme_version!}"></script>
-<#if (post?? && (!post.disallowComment!false) && (!settings.close_post_comment!false)) || (is_journals?? && settings.enable_journals_comment!true) || (is_links?? && (!settings.close_post_comment!false) && settings.link_comment_id?? && settings.link_comment_id!='' || settings.honorofkings_is_show?? && settings.honorofkings_is_show != 'none')>
+<#if (post?? && (!post.disallowComment!false) && (!settings.close_post_comment!false)) || (is_journals?? && settings.enable_journals_comment!true) || (is_links?? && (!settings.close_post_comment!false) && settings.link_comment_id?? && settings.link_comment_id!='' || settings.honorofkings_is_show?? && settings.honorofkings_is_show != 'none' || settings.bilibili_is_show?? && settings.bilibili_is_show != 'none')>
     <script data-pjax defer src="${theme_base!}/source/lib/vue@2.6.10/vue.min.js"></script>
     <script data-pjax defer
             src="${(settings.enable_theme_comment!true)?then(theme_base + '/source/lib/halo-comment@1.0.6/halo-comment.min.js',
@@ -47,6 +47,11 @@
 <#if settings.honorofkings_is_show?? && settings.honorofkings_is_show != 'none'>
     <script   defer src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0/axios.min.js"></script>
     <script   defer src="${theme_base!}/source/js/honorofkings.min.js?mew=${theme_version!}"></script>
+</#if>
+
+<#if settings.bilibili_is_show?? && settings.bilibili_is_show != 'none'>
+    <script   defer src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0/axios.min.js"></script>
+    <script   defer src="${theme_base!}/source/js/bilibili.min.js?mew=${theme_version!}"></script>
 </#if>
 
 

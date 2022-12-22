@@ -6,59 +6,59 @@ basic_info:
       label: <必填> AccessKey
       type: text
       default: dream
-      placeholder: '博客API设置中的Access Key'
-      description: 'Access Key 用于主题中 Content API 校验，填写有误将导致接口报错，需在博客高级设置中开启 API 服务，并使此处的 Access Key 与 API 设置中的保持一致。'
+      placeholder: "博客API设置中的Access Key"
+      description: "Access Key 用于主题中 Content API 校验，填写有误将导致接口报错，需在博客高级设置中开启 API 服务，并使此处的 Access Key 与 API 设置中的保持一致。"
     small_title:
       name: small_title
       label: 网站副标题
       type: text
-      placeholder: '网站副标题'
+      placeholder: "网站副标题"
     document_hidden_title:
       name: document_hidden_title
       label: 离屏文案（离开）
       type: text
-      placeholder: '浏览器切换到其它标签或后台时页面标题展示的文字'
+      placeholder: "浏览器切换到其它标签或后台时页面标题展示的文字"
     document_visible_title:
       name: document_visible_title
       label: 离屏文案（回来）
       type: text
-      placeholder: '浏览器返回到当前标签时页面标题展示的文字'
+      placeholder: "浏览器返回到当前标签时页面标题展示的文字"
     night_logo:
       name: night_logo
       label: 黑夜模式的logo(放空默认为网站logo)
       type: attachment
-      placeholder: '黑夜模式的logo'
+      placeholder: "黑夜模式的logo"
     page_number:
       name: page_number
       label: 分页页码数量
       type: text
-      placeholder: '分页页码数量'
-      default: '5'
+      placeholder: "分页页码数量"
+      default: "5"
     record_number:
       name: record_number
       label: 备案号
       type: text
-      placeholder: '工信部备案号'
+      placeholder: "工信部备案号"
     record_number_ps:
       name: record_number_ps
       label: 公安部备案
       type: text
-      placeholder: '公安部备案号'
+      placeholder: "公安部备案号"
     website_time:
       name: website_time
       label: 建站时间
       type: text
-      placeholder: 'YYYY/MM/dd HH:mm:ss'
+      placeholder: "YYYY/MM/dd HH:mm:ss"
     cloud_by_logo:
       name: cloud_by_logo
       label: 云服务提供商Logo
       type: attachment
-      placeholder: 'Logo图片url链接'
+      placeholder: "Logo图片url链接"
     cloud_by_url:
       name: cloud_by_url
       label: 云服务提供商URL
       type: text
-      placeholder: 'url地址'
+      placeholder: "url地址"
 basic_style:
   label: 基础样式
   items:
@@ -80,7 +80,7 @@ basic_style:
       type: switch
       data-type: bool
       default: false
-      description: '如果某个选项的背景图链接未指定，则不开启背景图。'
+      description: "如果某个选项的背景图链接未指定，则不开启背景图。"
       options:
         - value: true
           label: 开启
@@ -90,56 +90,56 @@ basic_style:
       name: background_pc
       label: 白天PC端背景图
       type: attachment
-      placeholder: '图片url链接'
+      placeholder: "图片url链接"
     background_mobile:
       name: background_mobile
       label: 白天移动端背景图
       type: attachment
-      placeholder: '图片url链接'
+      placeholder: "图片url链接"
     night_background_pc:
       name: night_background_pc
       label: 黑夜PC端背景图
       type: attachment
-      placeholder: '图片url链接'
+      placeholder: "图片url链接"
     night_background_mobile:
       name: night_background_mobile
       label: 黑夜移动端背景图
       type: attachment
-      placeholder: '图片url链接'
+      placeholder: "图片url链接"
     default_theme:
       name: default_theme
       label: 默认主题模式
       type: select
-      default: 'light'
-      placeholder: '浏览器首次打开博客时默认的主题模式。'
+      default: "light"
+      placeholder: "浏览器首次打开博客时默认的主题模式。"
       options:
-        - value: 'light'
+        - value: "light"
           label: 明亮主题
-        - value: 'night'
+        - value: "night"
           label: 黑暗主题
     theme_color:
       name: theme_color
       label: 主题色
       type: color
-      default: '#50bfff'
-      placeholder: '普通模式下的主题颜色'
+      default: "#50bfff"
+      placeholder: "普通模式下的主题颜色"
     night_theme_color:
       name: night_theme_color
       label: 黑夜主题色
       type: color
-      default: '#5d93db'
-      placeholder: '黑夜模式下的主题颜色'
+      default: "#5d93db"
+      placeholder: "黑夜模式下的主题颜色"
     sidebar_column:
       name: sidebar_column
       label: 侧边栏布局方式
       type: select
-      default: 'all'
+      default: "all"
       options:
-        - value: 'all'
+        - value: "all"
           label: 三列布局
-        - value: 'only-left'
+        - value: "only-left"
           label: 仅显示左侧
-        - value: 'only-right'
+        - value: "only-right"
           label: 仅显示右侧
     left_sidebar_sticky:
       name: left_sidebar_sticky
@@ -173,7 +173,7 @@ post:
       label: 置顶文章列表缩略图模式
       type: select
       default: back
-      description: '置顶的文章在列表的缩略图模式，如果文章元数据配置了“thumbnail_mode”项，则当前配置将被覆盖。'
+      description: "置顶的文章在列表的缩略图模式，如果文章元数据配置了“thumbnail_mode”项，则当前配置将被覆盖。"
       options:
         - value: default
           label: 默认模式
@@ -190,7 +190,7 @@ post:
       label: 文章列表缩略图模式
       type: select
       default: default
-      description: '文章列表缩略图模式，如果文章元数据配置了“thumbnail_mode”项，则当前配置将被覆盖。'
+      description: "文章列表缩略图模式，如果文章元数据配置了“thumbnail_mode”项，则当前配置将被覆盖。"
       options:
         - value: default
           label: 默认模式
@@ -347,15 +347,15 @@ post:
       label: 代码块折叠
       type: text
       default: 50
-      placeholder: '触发折叠的代码行数'
-      description: '代码行数超出指定行数后默认进行折叠，指定的行数需大于等于20。'
+      placeholder: "触发折叠的代码行数"
+      description: "代码行数超出指定行数后默认进行折叠，指定的行数需大于等于20。"
     enable_katex:
       name: enable_katex
       label: KaTeX 公式支持
       type: radio
       data-type: bool
       default: false
-      description: '博客通过 KaTeX 做数学公式渲染，如果文章或页面元数据配置了“enable_katex”项，则当前配置将被覆盖。'
+      description: "博客通过 KaTeX 做数学公式渲染，如果文章或页面元数据配置了“enable_katex”项，则当前配置将被覆盖。"
       options:
         - value: true
           label: 默认开启
@@ -367,7 +367,7 @@ post:
       type: radio
       data-type: bool
       default: true
-      description: '如果文章或页面元数据配置了“enable_copyright”项，则当前配置将被覆盖。'
+      description: "如果文章或页面元数据配置了“enable_copyright”项，则当前配置将被覆盖。"
       options:
         - value: true
           label: 默认开启
@@ -379,7 +379,7 @@ post:
       type: radio
       data-type: bool
       default: true
-      description: '如果文章或页面元数据配置了“enable_share”项，则当前配置将被覆盖。'
+      description: "如果文章或页面元数据配置了“enable_share”项，则当前配置将被覆盖。"
       options:
         - value: true
           label: 默认开启
@@ -400,12 +400,12 @@ post:
       name: donate_alipay
       label: 支付宝捐赠二维码
       type: attachment
-      placeholder: '二维码地址'
+      placeholder: "二维码地址"
     donate_wechat:
       name: donate_wechat
       label: 微信捐赠二维码
       type: attachment
-      placeholder: '二维码地址'
+      placeholder: "二维码地址"
 comment:
   label: 评论区
   items:
@@ -415,7 +415,7 @@ comment:
       type: switch
       data-type: bool
       default: true
-      description: '开启后将使用主题内置的评论区模块，如果使用其他评论区模块以下评论区相关的配置可能不生效。'
+      description: "开启后将使用主题内置的评论区模块，如果使用其他评论区模块以下评论区相关的配置可能不生效。"
       options:
         - value: true
           label: 开启
@@ -436,14 +436,14 @@ comment:
       name: image_token
       label: 图床Token
       type: text
-      placeholder: '图床Token'
+      placeholder: "图床Token"
       description: '评论区支持快捷上传图片到 <a href="https://pic.jitudisk.com/" target="_blank">极兔图床</a>，默认为游客上传，自行前往注册账号并获取 Token。注：配置后Token将被公开，同时主题不保证图床的稳定性！'
     unfold_reply_num:
       name: unfold_reply_num
       label: 默认展开的二级回复数量
       type: text
       default: 6
-      placeholder: '默认展开的二级回复数量'
+      placeholder: "默认展开的二级回复数量"
     show_comment_ua:
       name: show_comment_ua
       label: 显示评论的UA信息
@@ -474,7 +474,7 @@ comment:
       type: switch
       data-type: bool
       default: false
-      description: '如果是QQ邮箱，则优先使用QQ头像。'
+      description: "如果是QQ邮箱，则优先使用QQ头像。"
       options:
         - value: true
           label: 开启
@@ -486,7 +486,7 @@ comment:
       type: switch
       data-type: bool
       default: false
-      description: '评论时，自动通过QQ号自动获取QQ昵称和邮箱。'
+      description: "评论时，自动通过QQ号自动获取QQ昵称和邮箱。"
       options:
         - value: true
           label: 开启
@@ -498,7 +498,7 @@ comment:
       type: switch
       data-type: bool
       default: false
-      description: '允许评论输入html内容，开启后有用户注入恶意代码的风险（XSS），建议同时开启评论审核。'
+      description: "允许评论输入html内容，开启后有用户注入恶意代码的风险（XSS），建议同时开启评论审核。"
       options:
         - value: true
           label: 开启
@@ -518,12 +518,32 @@ honorofkings:
         - value: none
           label: 关闭
     honorofkings_api:
-       name: honorofkings_api
-       label: "honorofkings_api"
-       type: text
-       default: https://haibarai.com/timi
-       placeholder: 请输入API地址，默认 https://haibarai.com/timi。
-       description: "后台地址，用于获取数据，处理数据"
+      name: honorofkings_api
+      label: "honorofkings_api"
+      type: text
+      default: https://haibarai.com/timi
+      placeholder: 请输入API地址，默认 https://haibarai.com/timi。
+      description: "后台地址，用于获取数据，处理数据"
+bilibili:
+  label: 王者荣耀模块
+  items:
+    bilibili_is_show:
+      name: bilibili_is_show
+      label: 是否开启
+      type: radio
+      default: none
+      options:
+        - value: block
+          label: 开启
+        - value: none
+          label: 关闭
+    bilibili_api:
+      name: bilibili_api
+      label: "bilibili_api"
+      type: text
+      default: https://haibarai.com/bilibili
+      placeholder: 请输入API地址，默认 https://haibarai.com/bilibili
+      description: "后台地址，用于获取数据，处理数据"
 profile:
   label: 信息模块
   items:
@@ -544,21 +564,21 @@ profile:
       label: 侧边栏优先级
       type: text
       default: 9900
-      placeholder: '填写数字优先级'
-      description: '优先级越高，模块排序越靠前。'
+      placeholder: "填写数字优先级"
+      description: "优先级越高，模块排序越靠前。"
     hide_profile:
       name: hide_profile
       label: 隐藏方式
       type: select
-      default: 'is-not-hidden'
+      default: "is-not-hidden"
       options:
-        - value: 'is-hidden-mobile'
+        - value: "is-hidden-mobile"
           label: 移动设备隐藏
-        - value: 'is-hidden-not-desktop'
+        - value: "is-hidden-not-desktop"
           label: 移动、平板设备隐藏
-        - value: 'is-hidden-desktop'
+        - value: "is-hidden-desktop"
           label: 桌面设备隐藏
-        - value: 'is-not-hidden'
+        - value: "is-not-hidden"
           label: 不隐藏
     enable_color_character:
       name: enable_color_character
@@ -580,55 +600,55 @@ profile:
       name: profile_location
       label: 地理位置
       type: text
-      placeholder: '个人所在地'
+      placeholder: "个人所在地"
     profile_follow_url:
       name: profile_follow_url
       label: (关注我)按钮地址
       type: text
-      placeholder: '默认为博客地址'
+      placeholder: "默认为博客地址"
     social_github:
       name: social_github
       label: Github
       type: text
-      placeholder: 'Github 用户名'
+      placeholder: "Github 用户名"
     social_qq:
       name: social_qq
       label: QQ
       type: text
-      placeholder: 'QQ 号'
+      placeholder: "QQ 号"
     social_weibo:
       name: social_weibo
       label: 微博
       type: text
-      placeholder: '微博用户名'
+      placeholder: "微博用户名"
     social_twitter:
       name: social_twitter
       label: Twitter
       type: text
-      placeholder: 'Twitter 用户名'
+      placeholder: "Twitter 用户名"
     social_facebook:
       name: social_facebook
       label: Facebook
       type: text
-      placeholder: 'Facebook 用户名'
+      placeholder: "Facebook 用户名"
     social_email:
       name: social_email
-      label: '邮箱'
+      label: "邮箱"
       type: text
-      placeholder: '邮箱地址'
+      placeholder: "邮箱地址"
     social_telegram:
       name: social_telegram
       label: Telegram
       type: text
-      placeholder: 'Telegram 用户名'
+      placeholder: "Telegram 用户名"
     social_csdn:
       name: social_csdn
       label: CSDN
       type: text
-      placeholder: 'CSDN 主页'
+      placeholder: "CSDN 主页"
     social_rss:
       name: social_rss
-      label: 'RSS 订阅'
+      label: "RSS 订阅"
       type: select
       data-type: bool
       default: true
@@ -657,21 +677,21 @@ toc:
       label: 侧边栏优先级
       type: text
       default: 9800
-      placeholder: '填写数字优先级'
-      description: '优先级越高，模块排序越靠前。'
+      placeholder: "填写数字优先级"
+      description: "优先级越高，模块排序越靠前。"
     hide_toc:
       name: hide_toc
       label: 隐藏方式
       type: select
-      default: 'is-hidden-not-desktop'
+      default: "is-hidden-not-desktop"
       options:
-        - value: 'is-hidden-mobile'
+        - value: "is-hidden-mobile"
           label: 移动设备隐藏
-        - value: 'is-hidden-not-desktop'
+        - value: "is-hidden-not-desktop"
           label: 移动、平板设备隐藏
-        - value: 'is-hidden-desktop'
+        - value: "is-hidden-desktop"
           label: 桌面设备隐藏
-        - value: 'is-not-hidden'
+        - value: "is-not-hidden"
           label: 不隐藏
     drawer_toc:
       name: drawer_toc
@@ -679,7 +699,7 @@ toc:
       type: radio
       data-type: bool
       default: true
-      description: '在非桌面设备上，显示展开侧边抽屉式目录的悬浮按钮。'
+      description: "在非桌面设备上，显示展开侧边抽屉式目录的悬浮按钮。"
       options:
         - value: true
           label: 显示
@@ -705,21 +725,21 @@ notice:
       label: 侧边栏优先级
       type: text
       default: 9700
-      placeholder: '填写数字优先级'
-      description: '优先级越高，模块排序越靠前。'
+      placeholder: "填写数字优先级"
+      description: "优先级越高，模块排序越靠前。"
     hide_notice:
       name: hide_notice
       label: 隐藏方式
       type: select
-      default: 'is-not-hidden'
+      default: "is-not-hidden"
       options:
-        - value: 'is-hidden-mobile'
+        - value: "is-hidden-mobile"
           label: 移动设备隐藏
-        - value: 'is-hidden-not-desktop'
+        - value: "is-hidden-not-desktop"
           label: 移动、平板设备隐藏
-        - value: 'is-hidden-desktop'
+        - value: "is-hidden-desktop"
           label: 桌面设备隐藏
-        - value: 'is-not-hidden'
+        - value: "is-not-hidden"
           label: 不隐藏
     notice_content:
       name: notice_content
@@ -747,7 +767,7 @@ music:
       label: 侧边栏音乐
       type: radio
       default: none
-      description: '三列布局时不能在右侧显示音乐模块。'
+      description: "三列布局时不能在右侧显示音乐模块。"
       options:
         - value: left
           label: 左侧
@@ -760,46 +780,46 @@ music:
       label: 侧边栏优先级
       type: text
       default: 9600
-      placeholder: '填写数字优先级'
-      description: '优先级越高，模块排序越靠前。'
+      placeholder: "填写数字优先级"
+      description: "优先级越高，模块排序越靠前。"
     hide_music:
       name: hide_music
       label: 隐藏方式
       type: select
-      default: 'is-hidden-mobile'
+      default: "is-hidden-mobile"
       options:
-        - value: 'is-hidden-mobile'
+        - value: "is-hidden-mobile"
           label: 移动设备隐藏
-        - value: 'is-hidden-not-desktop'
+        - value: "is-hidden-not-desktop"
           label: 移动、平板设备隐藏
-        - value: 'is-hidden-desktop'
+        - value: "is-hidden-desktop"
           label: 桌面设备隐藏
-        - value: 'is-not-hidden'
+        - value: "is-not-hidden"
           label: 不隐藏
     music_mode:
       name: music_mode
       label: 音乐播放器配置方法
       type: radio
-      default: 'playlist'
+      default: "playlist"
       options:
-        - value: 'playlist'
+        - value: "playlist"
           label: 网易云歌单ID
-        - value: 'config'
+        - value: "config"
           label: 参数进阶配置
     netease_playlist_id:
       name: netease_playlist_id
       label: 网易云歌单ID
       type: text
-      placeholder: '填写网易云歌单的ID'
+      placeholder: "填写网易云歌单的ID"
     music_config:
       name: music_config
       label: 参数进阶配置
       type: textarea
-      placeholder: '音乐参数配置，(id,server,type为必须值)'
+      placeholder: "音乐参数配置，(id,server,type为必须值)"
       default: 'list-folded="true"
-                server="netease"
-                type="playlist"
-                id="7355014621"'
+        server="netease"
+        type="playlist"
+        id="7355014621"'
       description: '详细配置方式见官方文档：<a href="https://github.com/metowolf/MetingJS/" target="_blank">MetingJS 2.0</a>'
 ad_piece:
   label: 广告模块
@@ -821,21 +841,21 @@ ad_piece:
       label: 侧边栏优先级
       type: text
       default: 9500
-      placeholder: '填写数字优先级'
-      description: '优先级越高，模块排序越靠前。'
+      placeholder: "填写数字优先级"
+      description: "优先级越高，模块排序越靠前。"
     hide_ad_piece:
       name: hide_ad_piece
       label: 隐藏方式
       type: select
-      default: 'is-not-hidden'
+      default: "is-not-hidden"
       options:
-        - value: 'is-hidden-mobile'
+        - value: "is-hidden-mobile"
           label: 移动设备隐藏
-        - value: 'is-hidden-not-desktop'
+        - value: "is-hidden-not-desktop"
           label: 移动、平板设备隐藏
-        - value: 'is-hidden-desktop'
+        - value: "is-hidden-desktop"
           label: 桌面设备隐藏
-        - value: 'is-not-hidden'
+        - value: "is-not-hidden"
           label: 不隐藏
     show_ad_tag:
       name: show_ad_tag
@@ -874,19 +894,19 @@ ad_piece:
       name: ad_target_url
       label: 广告目标地址
       type: text
-      placeholder: '填写广告跳转的目标路径'
+      placeholder: "填写广告跳转的目标路径"
     ad_image:
       name: ad_image
       label: 广告图片链接
       type: attachment
-      description: '“图片+链接”模式时不能为空。'
-      placeholder: '填写图片路径'
+      description: "“图片+链接”模式时不能为空。"
+      placeholder: "填写图片路径"
     ad_custom_code:
       name: ad_custom_code
       label: 自定义广告代码
       type: textarea
-      placeholder: '在这里黏贴广告联盟提供的广告代码'
-      description: '“自定义广告代码”模式时不能为空。'
+      placeholder: "在这里黏贴广告联盟提供的广告代码"
+      description: "“自定义广告代码”模式时不能为空。"
 recent_posts:
   label: 最近文章模块
   items:
@@ -907,21 +927,21 @@ recent_posts:
       label: 侧边栏优先级
       type: text
       default: 9400
-      placeholder: '填写数字优先级'
-      description: '优先级越高，模块排序越靠前。'
+      placeholder: "填写数字优先级"
+      description: "优先级越高，模块排序越靠前。"
     hide_recent_posts:
       name: hide_recent_posts
       label: 隐藏方式
       type: select
-      default: 'is-not-hidden'
+      default: "is-not-hidden"
       options:
-        - value: 'is-hidden-mobile'
+        - value: "is-hidden-mobile"
           label: 移动设备隐藏
-        - value: 'is-hidden-not-desktop'
+        - value: "is-hidden-not-desktop"
           label: 移动、平板设备隐藏
-        - value: 'is-hidden-desktop'
+        - value: "is-hidden-desktop"
           label: 桌面设备隐藏
-        - value: 'is-not-hidden'
+        - value: "is-not-hidden"
           label: 不隐藏
     recent_posts_num:
       name: recent_posts_num
@@ -949,21 +969,21 @@ recent_comments:
       label: 侧边栏优先级
       type: text
       default: 9300
-      placeholder: '填写数字优先级'
-      description: '优先级越高，模块排序越靠前。'
+      placeholder: "填写数字优先级"
+      description: "优先级越高，模块排序越靠前。"
     hide_recent_comments:
       name: hide_recent_comments
       label: 隐藏方式
       type: select
-      default: 'is-not-hidden'
+      default: "is-not-hidden"
       options:
-        - value: 'is-hidden-mobile'
+        - value: "is-hidden-mobile"
           label: 移动设备隐藏
-        - value: 'is-hidden-not-desktop'
+        - value: "is-hidden-not-desktop"
           label: 移动、平板设备隐藏
-        - value: 'is-hidden-desktop'
+        - value: "is-hidden-desktop"
           label: 桌面设备隐藏
-        - value: 'is-not-hidden'
+        - value: "is-not-hidden"
           label: 不隐藏
     recent_comments_num:
       name: recent_comments_num
@@ -991,21 +1011,21 @@ categories:
       label: 侧边栏优先级
       type: text
       default: 9200
-      placeholder: '填写数字优先级'
-      description: '优先级越高，模块排序越靠前。'
+      placeholder: "填写数字优先级"
+      description: "优先级越高，模块排序越靠前。"
     hide_categories:
       name: hide_categories
       label: 隐藏方式
       type: select
-      default: 'is-not-hidden'
+      default: "is-not-hidden"
       options:
-        - value: 'is-hidden-mobile'
+        - value: "is-hidden-mobile"
           label: 移动设备隐藏
-        - value: 'is-hidden-not-desktop'
+        - value: "is-hidden-not-desktop"
           label: 移动、平板设备隐藏
-        - value: 'is-hidden-desktop'
+        - value: "is-hidden-desktop"
           label: 桌面设备隐藏
-        - value: 'is-not-hidden'
+        - value: "is-not-hidden"
           label: 不隐藏
     categories_more:
       name: categories_more
@@ -1045,21 +1065,21 @@ tags:
       label: 侧边栏优先级
       type: text
       default: 9100
-      placeholder: '填写数字优先级'
-      description: '优先级越高，模块排序越靠前。'
+      placeholder: "填写数字优先级"
+      description: "优先级越高，模块排序越靠前。"
     hide_tags:
       name: hide_tags
       label: 隐藏方式
       type: select
-      default: 'is-not-hidden'
+      default: "is-not-hidden"
       options:
-        - value: 'is-hidden-mobile'
+        - value: "is-hidden-mobile"
           label: 移动设备隐藏
-        - value: 'is-hidden-not-desktop'
+        - value: "is-hidden-not-desktop"
           label: 移动、平板设备隐藏
-        - value: 'is-hidden-desktop'
+        - value: "is-hidden-desktop"
           label: 桌面设备隐藏
-        - value: 'is-not-hidden'
+        - value: "is-not-hidden"
           label: 不隐藏
     tags_more:
       name: tags_more
@@ -1110,21 +1130,21 @@ tagcloud:
       label: 侧边栏优先级
       type: text
       default: 9000
-      placeholder: '填写数字优先级'
-      description: '优先级越高，模块排序越靠前。'
+      placeholder: "填写数字优先级"
+      description: "优先级越高，模块排序越靠前。"
     hide_tagcloud:
       name: hide_tagcloud
       label: 隐藏方式
       type: select
-      default: 'is-hidden-not-desktop'
+      default: "is-hidden-not-desktop"
       options:
-        - value: 'is-hidden-mobile'
+        - value: "is-hidden-mobile"
           label: 移动设备隐藏
-        - value: 'is-hidden-not-desktop'
+        - value: "is-hidden-not-desktop"
           label: 移动、平板设备隐藏
-        - value: 'is-hidden-desktop'
+        - value: "is-hidden-desktop"
           label: 桌面设备隐藏
-        - value: 'is-not-hidden'
+        - value: "is-not-hidden"
           label: 不隐藏
     tagcloud_more:
       name: tagcloud_more
@@ -1175,21 +1195,21 @@ links:
       label: 侧边栏优先级
       type: text
       default: 8900
-      placeholder: '填写数字优先级'
-      description: '优先级越高，模块排序越靠前。'
+      placeholder: "填写数字优先级"
+      description: "优先级越高，模块排序越靠前。"
     hide_links:
       name: hide_links
       label: 隐藏方式
       type: select
-      default: 'is-hidden-not-desktop'
+      default: "is-hidden-not-desktop"
       options:
-        - value: 'is-hidden-mobile'
+        - value: "is-hidden-mobile"
           label: 移动设备隐藏
-        - value: 'is-hidden-not-desktop'
+        - value: "is-hidden-not-desktop"
           label: 移动、平板设备隐藏
-        - value: 'is-hidden-desktop'
+        - value: "is-hidden-desktop"
           label: 桌面设备隐藏
-        - value: 'is-not-hidden'
+        - value: "is-not-hidden"
           label: 不隐藏
     links_more:
       name: links_more
@@ -1216,12 +1236,12 @@ link_page:
       name: links_thumbnail
       label: 友链界面缩略图
       type: attachment
-      placeholder: '友链界面缩略图'
+      placeholder: "友链界面缩略图"
     links_default_avatar:
       name: links_default_avatar
       label: 友链默认头像
       type: attachment
-      placeholder: '未设置头像用户的默认头像'
+      placeholder: "未设置头像用户的默认头像"
     show_exchange_info:
       name: show_exchange_info
       label: 显示友链交换信息
@@ -1237,18 +1257,18 @@ link_page:
       name: links_blogger_avatar
       label: 交换信息-博主头像链接
       type: attachment
-      placeholder: '用于交换友链的博主头像链接'
+      placeholder: "用于交换友链的博主头像链接"
     links_info:
       name: links_info
       label: 友链界面补充信息
       type: textarea
-      placeholder: '友链界面补充信息'
+      placeholder: "友链界面补充信息"
     link_comment_id:
       name: link_comment_id
       label: 友链界面评论区ID
       type: text
-      placeholder: '友链界面评论区ID'
-      description: '友链界面没有ID，需要指定一个自定义页面的ID用于评论，被指定的文章评论区将作为友链的评论区，放空则不显示评论区。'
+      placeholder: "友链界面评论区ID"
+      description: "友链界面没有ID，需要指定一个自定义页面的ID用于评论，被指定的文章评论区将作为友链的评论区，放空则不显示评论区。"
 other_page:
   label: 其他页面
   items:
@@ -1257,8 +1277,8 @@ other_page:
       label: 动态页面-动态内容折叠
       type: text
       default: 500
-      placeholder: '触发折叠的动态内容高度（px）'
-      description: '动态内容高度超出指定高度后默认进行折叠，指定的高度需大于等于260px。'
+      placeholder: "触发折叠的动态内容高度（px）"
+      description: "动态内容高度超出指定高度后默认进行折叠，指定的高度需大于等于260px。"
     enable_tags_tag_color:
       name: enable_tags_tag_color
       label: 标签页面-开启标签颜色
@@ -1299,21 +1319,21 @@ live2d:
       name: live2d_about_page
       label: “关于”按钮的url地址
       type: text
-      placeholder: 'url地址'
-      description: '放空则不显示“关于”按钮。'
+      placeholder: "url地址"
+      description: "放空则不显示“关于”按钮。"
     live2d_waifu_size:
       name: live2d_waifu_size
       label: 看板娘大小
       type: text
-      default: '280x260'
-      placeholder: '宽度(px)x高度(px)'
-      description: '看板娘的（宽度x高度），单位为px。'
+      default: "280x260"
+      placeholder: "宽度(px)x高度(px)"
+      description: "看板娘的（宽度x高度），单位为px。"
     live2d_edge_side:
       name: live2d_edge_side
       label: 看板娘贴边方向与距离
       type: text
-      default: 'right:50'
-      placeholder: '位置:距离(px)'
+      default: "right:50"
+      placeholder: "位置:距离(px)"
 enhance:
   label: 增强功能
   items:
@@ -1426,7 +1446,7 @@ enhance:
       type: switch
       data-type: bool
       default: false
-      description: '向英雄致敬，愿精神长存！'
+      description: "向英雄致敬，愿精神长存！"
       options:
         - value: true
           label: 开启
@@ -1438,7 +1458,7 @@ enhance:
       type: switch
       data-type: bool
       default: true
-      description: '引入补丁脚本，实现不更新主题进行bug修复！'
+      description: "引入补丁脚本，实现不更新主题进行bug修复！"
       options:
         - value: true
           label: 开启
@@ -1516,5 +1536,3 @@ custom:
       type: textarea
       placeholder: JS代码内容
       description: "填入JS代码，无需script标签，将插入body标签尾部。"
-
-
