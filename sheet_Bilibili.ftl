@@ -1,5 +1,5 @@
 <#include "template/layout.ftl">
-  <@layout title="追番 - ${blog_title!}" canonical="/s/bilibili">
+  <@layout title="追番 - ${blog_title!}" canonical="/s/fan">
 
   <style>
      .noBilibili{
