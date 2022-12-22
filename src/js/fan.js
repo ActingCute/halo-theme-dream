@@ -2,7 +2,7 @@
  * @Author: zhanghui rem486@qq.com
  * @Date: 2022-12-22 11:53:20
  * @LastEditors: zhanghui rem486@qq.com
- * @LastEditTime: 2022-12-22 14:54:24
+ * @LastEditTime: 2022-12-22 14:58:35
  * @FilePath: \halo-theme-dream\src\js\fan.js
  * @Description: 说明
  */
@@ -44,7 +44,7 @@ const initBilibiliVue = function () {
         $('.bilibili').addClass('loading');
 
         let that = this
-        axios.get(`http://localhost:8787/bilibili/1/10`).then(function (res) {
+        axios.get(`/bilibili/1/10`).then(function (res) {
           that.setRecordData(res)
         })
       },
