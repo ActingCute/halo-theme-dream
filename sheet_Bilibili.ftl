@@ -119,6 +119,7 @@
   </style>
      
     <div class="imgBox bilibili" id="bilibili" v-show="show">
+
       <div class="imgItem" v-for="(item,index) in bilibiliContents" :key="index+'bilibiliContents'">
         <!-- <div class="imgItem1"></div> -->
         <div class="imgItem1" v-bind:style="{ backgroundImage: 'url(' + item.img + ')' }"></div>
