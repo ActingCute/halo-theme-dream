@@ -15,16 +15,18 @@
     .imgItem {
       display: inline-block;
       width: 25%;
+      aspect-ratio: 3/4;
       margin: 0 auto;
       position: relative;
     }
 
     .imgItem1 {
       width: 99%;
-      height: 400px;
+      height: 100%;
       background-color: #eee;
       position: relative;
 
+      background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
     }
