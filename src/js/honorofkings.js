@@ -1,7 +1,6 @@
 var honorofkingsVue = null;
 var honorofkings_api = $('#honorofkings_api').val() || '/timi';
 
-axios.defaults.baseURL = honorofkings_api;
 
 console.log({
   honorofkings_api
@@ -67,7 +66,7 @@ const initHonorofkingsVue = function () {
             code: Number(loginData.code), //大区
             equipment: Number(loginData.equipment) //安卓 ios
           }
-          axios.post('/record/login', loginData).then(res => {
+          axios.post(honorofkings_api + '/record/login', loginData).then(res => {
             if (res.status == 200 && res.data.Code == 10000) {
               console.log("res==", res);
               alert("请在30秒内完成扫码");
@@ -130,7 +129,7 @@ const initHonorofkingsVue = function () {
           aa = JSON.parse(aa);
           if (aa.value && aa.value.access_token)
             $.ajax({
-              url: '/api/admin/attachments',
+              url: honorofkings_api + '/api/admin/attachments',
               type: 'GET',
               beforeSend: function (request) {
                 request.setRequestHeader("Admin-Authorization", aa.value.access_token);
@@ -139,14 +138,14 @@ const initHonorofkingsVue = function () {
               this.isLogin = res.status == 200;
               if (this.isLogin) {
                 //加载大区 wx
-                axios.get('/wz/getRole?type=1').then(res => {
+                axios.get(honorofkings_api + '/wz/getRole?type=1').then(res => {
                   console.log(res);
                   if (res.status == 200 && res.data.Code == 10000) {
                     this.roleWx = res.data.Data;
                   }
                 })
                 //加载大区 qq
-                axios.get('/wz/getRole?type=2').then(res => {
+                axios.get(honorofkings_api + '/wz/getRole?type=2').then(res => {
                   if (res.status == 200 && res.data.Code == 10000) {
                     this.roleQQ = res.data.Data;
                   }
@@ -161,7 +160,7 @@ const initHonorofkingsVue = function () {
         this.sLoading = true;
         $('.honorofkings').addClass('loading');
 
-        const getUserInfo = axios.get('/user/info');
+        const getUserInfo = axios.get(honorofkings_api + '/user/info');
 
         axios.all(
             [this.getRecordData(this.queryParams), getUserInfo]
@@ -192,7 +191,7 @@ const initHonorofkingsVue = function () {
       },
       /* 获取王者荣耀战绩数据 */
       getRecordData(params) {
-        return axios.get('/record/get', {
+        return axios.get(honorofkings_api + '/record/get', {
           params
         });
       },
