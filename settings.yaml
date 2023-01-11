@@ -43,7 +43,7 @@ basic_info:
       name: record_number_ps
       label: 公安部备案
       type: text
-      placeholder: "公安部备案号"
+      placeholder: '公安部备案号'
     website_time:
       name: website_time
       label: 建站时间
@@ -105,7 +105,7 @@ basic_style:
       name: night_background_mobile
       label: 黑夜移动端背景图
       type: attachment
-      placeholder: "图片url链接"
+      placeholder: '图片url链接'
     default_theme:
       name: default_theme
       label: 默认主题模式
@@ -117,6 +117,8 @@ basic_style:
           label: 明亮主题
         - value: "night"
           label: 黑暗主题
+        - value: 'system'
+          label: 跟随系统
     theme_color:
       name: theme_color
       label: 主题色
@@ -127,8 +129,8 @@ basic_style:
       name: night_theme_color
       label: 黑夜主题色
       type: color
-      default: "#5d93db"
-      placeholder: "黑夜模式下的主题颜色"
+      default: '#5d93db'
+      placeholder: '黑夜模式下的主题颜色'
     sidebar_column:
       name: sidebar_column
       label: 侧边栏布局方式
@@ -168,6 +170,12 @@ basic_style:
 post:
   label: 文章设置
   items:
+    default_thumbnail:
+      name: default_thumbnail
+      label: 默认文章缩略图
+      type: attachment
+      placeholder: '图片url地址'
+      description: '如果文章没有指定缩略图，则默认显示当前缩略图'
     top_thumbnail_mode:
       name: top_thumbnail_mode
       label: 置顶文章列表缩略图模式
@@ -347,8 +355,8 @@ post:
       label: 代码块折叠
       type: text
       default: 50
-      placeholder: "触发折叠的代码行数"
-      description: "代码行数超出指定行数后默认进行折叠，指定的行数需大于等于20。"
+      placeholder: '触发折叠的代码行数'
+      description: '代码行数超出指定行数后默认进行折叠，指定的行数需大于等于20。'
     enable_katex:
       name: enable_katex
       label: KaTeX 公式支持
@@ -421,17 +429,6 @@ comment:
           label: 开启
         - value: false
           label: 关闭
-    autoload_comment:
-      name: autoload_comment
-      label: 自动加载评论列表
-      type: switch
-      data-type: bool
-      default: true
-      options:
-        - value: true
-          label: 开启
-        - value: false
-          label: 关闭
     image_token:
       name: image_token
       label: 图床Token
@@ -443,7 +440,7 @@ comment:
       label: 默认展开的二级回复数量
       type: text
       default: 6
-      placeholder: "默认展开的二级回复数量"
+      placeholder: '默认展开的二级回复数量'
     show_comment_ua:
       name: show_comment_ua
       label: 显示评论的UA信息
@@ -480,6 +477,18 @@ comment:
           label: 开启
         - value: false
           label: 关闭
+    avatar_loading:
+      name: avatar_loading
+      label: 头像加载动画
+      type: attachment
+      placeholder: '图片url链接'
+      description: '加载用户头像时的加载动画。'
+    default_avatar:
+      name: default_avatar
+      label: 默认评论头像
+      type: attachment
+      placeholder: '图片url链接'
+      description: '如果用户头像加载失败，则显示默认头像。'
     enable_qq_info:
       name: enable_qq_info
       label: 获取QQ昵称和头像
@@ -600,12 +609,12 @@ profile:
       name: profile_location
       label: 地理位置
       type: text
-      placeholder: "个人所在地"
+      placeholder: '个人所在地'
     profile_follow_url:
       name: profile_follow_url
       label: (关注我)按钮地址
       type: text
-      placeholder: "默认为博客地址"
+      placeholder: '默认为博客地址'
     social_github:
       name: social_github
       label: Github
@@ -640,12 +649,12 @@ profile:
       name: social_telegram
       label: Telegram
       type: text
-      placeholder: "Telegram 用户名"
+      placeholder: 'Telegram 用户名'
     social_csdn:
       name: social_csdn
       label: CSDN
       type: text
-      placeholder: "CSDN 主页"
+      placeholder: 'CSDN 主页'
     social_rss:
       name: social_rss
       label: "RSS 订阅"
@@ -657,6 +666,12 @@ profile:
           label: 开启
         - value: false
           label: 关闭
+    custom_social_options:
+      name: custom_social_options
+      label: 自定义社交选项
+      type: textarea
+      placeholder: "自定义社交选项内容"
+      description: 一行表示一个社交渠道，每个社交渠道需要名称、图标和链接地址三个参数，参数之间使用“|”分隔，主题内置图标采用 FontAwesome 4.7。
 toc:
   label: 目录模块
   items:
@@ -796,9 +811,15 @@ music:
           label: 桌面设备隐藏
         - value: "is-not-hidden"
           label: 不隐藏
+    meting_api:
+      name: meting_api
+      label: 自建API
+      type: text
+      placeholder: '自建API的请求路径'
+      description: '自建API方法见文档：<a href="https://github.com/metowolf/Meting" target="_blank">Meting</a>'
     music_mode:
       name: music_mode
-      label: 音乐播放器配置方法
+      label: 音乐播放器配置方式
       type: radio
       default: "playlist"
       options:
@@ -1274,28 +1295,44 @@ other_page:
   items:
     journals_fold_height:
       name: journals_fold_height
-      label: 动态页面-动态内容折叠
+      label: 日志页面-动态内容折叠
       type: text
       default: 500
-      placeholder: "触发折叠的动态内容高度（px）"
-      description: "动态内容高度超出指定高度后默认进行折叠，指定的高度需大于等于260px。"
+      placeholder: '触发折叠的动态内容高度（px）'
+      description: '动态内容高度超出指定高度后默认进行折叠，指定的高度需大于等于260px。'
+    enable_tags_tag_color:
+      name: enable_tags_tag_color
+      label: 标签页面-开启标签颜色
+      type: switch
+      data-type: bool
+      default: true
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    enable_journals_share:
+      name: enable_journals_share
+      label: 日志页面-开启日志分享
+      type: switch
+      data-type: bool
+      default: true
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    journals_share_image:
+      name: journals_share_image
+      label: 日志页面-日志分享背景图
+      type: attachment
+      placeholder: '图片url'
     enable_tags_tag_color:
       name: enable_tags_tag_color
       label: 标签页面-开启标签颜色
       type: switch
       data-type: bool
       default: false
-      options:
-        - value: true
-          label: 开启
-        - value: false
-          label: 关闭
-    enable_journals_comment:
-      name: enable_journals_comment
-      label: 日志页面-开启评论区
-      type: switch
-      data-type: bool
-      default: true
       options:
         - value: true
           label: 开启
@@ -1315,6 +1352,13 @@ live2d:
           label: 开启
         - value: false
           label: 关闭
+    live2d_model_url:
+      name: live2d_model_url
+      label: 模型地址
+      type: text
+      default: 'https://unpkg.com/live2d-widget-model@1.0.0/'
+      placeholder: '模型url地址'
+      description: 'live2d模型和api地址，可通过克隆模型仓库实现自建地址。'
     live2d_about_page:
       name: live2d_about_page
       label: “关于”按钮的url地址

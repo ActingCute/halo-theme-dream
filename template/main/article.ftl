@@ -22,8 +22,12 @@
             </div>
         </div>
     </#if>
+    <#assign updateInterval = ((.now?long - post.updateTime?long)/86400000)?floor >
+    <#if updateInterval gt (settings.invalid_tips_day!'99999999')?number >
+        <div class="card tips"><i class="fa fa-times click-close" data-close=".tips"></i>本文最后更新于 ${post.updateTime?string('yyyy-MM-dd')}，距今已有 ${updateInterval} 天，若文章内容或图片链接失效，请留言反馈。</div>
+    </#if>
     <#if (metas?? && metas.tips?? && metas.tips!='')>
-        <div class="tips"><i class="fa fa-times click-close" data-close=".tips"></i>${metas.tips}</div>
+        <div class="card tips"><i class="fa fa-times click-close" data-close=".tips"></i>${metas.tips}</div>
     </#if>
     <div class="card">
         <div class="card-content main">
@@ -52,7 +56,7 @@
             <#include "admire.ftl">
 
             <#if tags?? && (tags?size gt 0)>
-                <div class="level article-operation">
+                <div class="article-operation">
                     <div class="level-item">
                         <#list tags as tag>
                             <a href="${tag.fullPath!}">${tag.name!}</a>&nbsp;
@@ -61,14 +65,13 @@
                 </div>
             </#if>
             <#assign enable_copyright = (metas?? && metas.enable_copyright?? && metas.enable_copyright?trim!='')?then(metas.enable_copyright?trim, (settings.enable_copyright!true)?c)>
-            <#assign enable_share = (metas?? && metas.enable_share?? && metas.enable_share?trim!='')?then(metas.enable_share?trim, (settings.enable_post_share!true)?c)>
-            <#if enable_copyright == 'true' || enable_share == 'true'>
+            <#if enable_copyright == 'true' || enable_share>
                 <hr/>
                 <#if enable_copyright == 'true'>
                     <#include "copyright.ftl">
                 </#if>
-                <#if enable_share == 'true'>
-                    <#include "share.ftl">
+                <#if enable_share>
+                    <div class="dshare"></div>
                 </#if>
             </#if>
         </div>

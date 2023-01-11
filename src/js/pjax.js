@@ -9,6 +9,14 @@ const createSerialNumber = () => {
     return serialNumber;
 }
 
+const computeScrollTop = (target) => {
+    // 当前为横幅大图模式，处理滚动
+    if (target.pathname !== '/' && $('.banner').length !== 0) {
+        return window.innerHeight / 4
+    }
+    return 0
+}
+
 const syncLoadScripts = ($scripts, i, resolve) => {
     if (i >= $scripts.length) {
         resolve && resolve();
@@ -38,9 +46,8 @@ const syncLoadScripts = ($scripts, i, resolve) => {
  * fragment:是加载的文本中被选中的目标内容
  */
 $(document).on('click', 'a[target!=_blank][href]:not(data-not-pjax)', (event) => {
-    window.DProgress && DProgress.start()
     $.pjax.click(event, ".column-main", {
-        scrollTo: 0,
+        scrollTo: computeScrollTop(event.currentTarget),
         fragment: ".column-main",
         serialNumber: createSerialNumber(),
         timeout: 8000,
@@ -49,7 +56,6 @@ $(document).on('click', 'a[target!=_blank][href]:not(data-not-pjax)', (event) =>
 
 
 $(document).on('submit', 'form[data-pjax]', function (event) {
-    window.DProgress && DProgress.start()
     $.pjax.submit(event, ".column-main", {
         scrollTo: 0,
         fragment: ".column-main",
@@ -65,20 +71,17 @@ $(document).on("pjax:click", function (event, options) {
 
 $(document).on("pjax:beforeSend", function (event, xhr, options) {
     console.log(`pjax:beforeSend sn = ${options.serialNumber}`)
+    $('html').addClass('pjax-loading')
 });
 
 $(document).on("pjax:start", function (event, xhr, options) {
     console.log(`pjax:start sn = ${options.serialNumber}`)
+    window.DProgress && DProgress.start()
+    $('.pjax-close').remove();
 });
 
 $(document).on("pjax:send", function (event, xhr, options) {
     console.log(`pjax:send sn = ${options.serialNumber}`)
-    // $("html, body").animate(
-    //     {
-    //         scrollTop: $("body").position().top - 60,
-    //     },
-    //     500
-    // );
 });
 
 $(document).on("pjax:clicked", function (event, options) {
@@ -105,14 +108,18 @@ $(document).on("pjax:beforeReplace", function (event, contents, options) {
 $(document).on("pjax:success", async function (event, data, status, xhr, options) {
     const serialNumber = options.serialNumber;
     console.log(`pjax:success sn = ${serialNumber}`)
-    if (pjaxSerialNumber !== serialNumber) return;
+    if (window.pjaxSerialNumber !== serialNumber) return;
     /* 重新激活图片预览功能 */
     commonContext.initGallery()
     /* 重新加载目录和公告 */
     commonContext.initTocAndNotice()
+    /* 已经完成页面渲染 */
+    $('html').removeClass('pjax-loading')
 
     const $currentTarget = $($.parseHTML(data, document, true));
     const $head = $("head");
+    $head.find('meta').remove();
+    $head.append($currentTarget.filter("meta"))
     $currentTarget.filter('link[data-pjax]').each(function () {
         let href = $(this).attr('href')
         if (!cssLoadCompletes.has(href)) {
@@ -152,7 +159,7 @@ $(document).on("pjax:success", async function (event, data, status, xhr, options
         });
     }
     console.log('全部处理完成')
-    if (pjaxSerialNumber !== serialNumber) return;
+    if (window.pjaxSerialNumber !== serialNumber) return;
     /* 初始化日志界面 */
     window.journalPjax && window.journalPjax(serialNumber);
     /* 初始化文章界面 */
@@ -187,11 +194,13 @@ $(document).on("pjax:complete", function (event, xhr, textStatus, options) {
  */
 $(document).on("pjax:end", function (event, xhr, options) {
     console.log(`pjax:end sn = ${options.serialNumber}`)
-    // 浏览器前进后退
+    // 如果是浏览器前进后退
     if (xhr == null) {
         /* 重新加载目录和公告 */
         commonContext.initTocAndNotice()
         window.DProgress && DProgress.done()
+        // 应该是由于浏览器缓存失效，有时候浏览器前后退还是会执行pjax:beforeSend
+        $('html').removeClass('pjax-loading')
     }
 });
 

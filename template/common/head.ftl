@@ -3,21 +3,22 @@
     <script src="${(settings.enable_sw == "uninstall")?then('${theme_base!}/source/js/sw.min.js?mew=1.0.5','/sw.min.js?mew=1.0.5${settings.enable_sw!}')}"></script>
 </#if>
 <meta charset="utf-8"/>
+<#assign description=(post??)?then(post.summary!, meta_description!)!user.description!>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="keywords" content="${meta_keywords!}"/>
-<meta name="description" content="${meta_description!}">
+<meta name="description" content="${description!}">
 <meta name="author" content="${user.nickname!}">
 <meta name="site" content="${blog_url!}">
 <meta property="og:type" content="website">
 <meta property="og:title" content="${title!}">
 <meta property="og:url" content="${canonical}">
 <meta property="og:site_name" content="${title!}">
-<meta property="og:description" content="${meta_description!}">
+<meta property="og:description" content="${description!}">
 <meta property="og:locale" content="zh">
 <meta property="og:image" content="${user.avatar!}">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="${title!}">
-<meta name="twitter:description" content="${meta_description!}">
+<meta name="twitter:description" content="${description!}">
 <meta name="twitter:image" content="${user.avatar!}">
 <link rel="canonical" href="${canonical!}"/>
 <link rel="alternative" href="${atom_url!}" title="${blog_title!}" type="application/atom+xml">
@@ -39,6 +40,10 @@
     <#assign enable_katex = (metas?? && metas.enable_katex?? && metas.enable_katex?trim!='')?then(metas.enable_katex?trim, (settings.enable_katex!false)?c)>
     <#if enable_katex=='true'>
         <link data-pjax rel="preload stylesheet" as="style" href="${theme_base!}/source/lib/katex@0.12.0/katex.min.css"/>
+    </#if>
+    <#assign enable_share = (post?? && (metas?? && metas.enable_share?? && metas.enable_share?trim!='')?then(metas.enable_share?trim, (settings.enable_post_share!true)?c) == 'true') || (is_journals?? && settings.enable_journals_share!true)>
+    <#if enable_share>
+        <link data-pjax rel="preload stylesheet" as="style" href="${theme_base!}/source/css/dshare.min.css">
     </#if>
 </#if>
 

@@ -1,4 +1,32 @@
+let postContextInitial = false
 const postContext = {
+    /* 初始化事件 */
+    initEvent() {
+        if (postContextInitial) return
+        let $body = $("body")
+        // 代码块展开和关闭点击事件
+        $body.on("click", "figure>figcaption .fa-angle-down", function () {
+            let $this = $(this);
+            if ($this.is('.close')) {
+                $($this.attr('data-code')).parent().slideDown(200);
+                $this.removeClass('close');
+            } else {
+                $($this.attr('data-code')).parent().slideUp(200);
+                $this.addClass('close');
+            }
+        });
+        // 代码内容块展开和折叠点击事件
+        $body.on("click", "figure > pre > .expand-done", function () {
+            Utils.foldBlock($(this).parent().parent());
+        })
+        // 图片的展开和折叠事件
+        $body.on("click", ".gallery-item .expand-done", function (e) {
+            e.stopPropagation();
+            Utils.foldBlock($(this).parent());
+        })
+        Utils.initLikeEvent(".admire .agree.like", 'posts', ($elem) => $elem.find('span').find('span'))
+        postContextInitial = true
+    },
     /* 初始化代码块 */
     initCodeBlock() {
         const $code = $("*:not(figure) > pre > code");
@@ -51,32 +79,25 @@ const postContext = {
             }
             $pre.parent().prepend(`<figcaption>${title}${titleButton}</figcaption>`);
         })
-        // 代码块展开和关闭点击事件
-        $(".main-content").on("click", "figure>figcaption .fa-angle-down", function () {
-            if ($(this).is('.close')) {
-                $($(this).attr('data-code')).parent().slideDown(200);
-                $(this).removeClass('close');
-            } else {
-                $($(this).attr('data-code')).parent().slideUp(200);
-                $(this).addClass('close');
-            }
-        });
-        // 内容块展开和折叠点击事件
-        $(".main-content .expand-done").on("click", function () {
-            Utils.foldBlock($(this).parent().parent());
-        })
     },
     /* 初始化喜欢功能 */
     /* 点赞 */
     initLike() {
-        $(".admire .agree.like").each(function () {
-            Utils.like($(this), $(this).find('span').find('span'), 'posts')
-        });
+        Utils.initLikeButton(".admire .agree.like", 'posts')
     },
     /* 代码块高亮 */
     initHighlighting() {
         // 初始化代码块高亮工具
         hljs.initHighlightingOnLoad();
+    },
+    /**
+     * 初始化分享
+     */
+    initShare() {
+        if (!window.DShare) return
+        let imageUrl = $('.cover-image').css('background-image');
+        imageUrl && (imageUrl = imageUrl.substring(5, imageUrl.length - 2));
+        DShare.create('.dshare', {image: imageUrl, imageSelector: '.main-content'})
     },
     /* 代码块复制 */
     initClipboard() {
@@ -92,6 +113,30 @@ const postContext = {
         clipboard.on('success', function () {
             Qmsg.success("复制成功");
         })
+    },
+    /* 初始化图片折叠 */
+    foldImage() {
+        if (!DreamConfig.img_fold_height) return
+        const $galleryList = $(".article .gallery-item>[data-fancybox]>img");
+        $galleryList.parent().addClass("fold")
+        $galleryList.each(function () {
+            const $gallery = $(this).parent();
+            if (this.complete) {
+                if (this.scrollHeight >= DreamConfig.img_fold_height) {
+                    $gallery.append(`<div class="expand-done"><i class="fa fa-angle-double-up"></i></div>`);
+                } else {
+                    $gallery.removeClass('fold');
+                }
+            } else {
+                this.onload = function () {
+                    if (this.scrollHeight >= DreamConfig.img_fold_height) {
+                        $gallery.append(`<div class="expand-done"><i class="fa fa-angle-double-up"></i></div>`);
+                    } else {
+                        $gallery.removeClass('fold');
+                    }
+                }
+            }
+        })
     }
 }
 window.postPjax = function (serialNumber) {
@@ -101,11 +146,14 @@ window.postPjax = function (serialNumber) {
     );
 }
 !(function () {
-    !window.pjaxSerialNumber && postContext.initLike();
-    !window.pjaxSerialNumber && postContext.initCodeBlock();
+    const advances = ["initEvent", "initCodeBlock", "initLike", "foldImage"];
+    Object.keys(postContext).forEach(
+        (c) => !window.pjaxSerialNumber && advances.includes(c) && postContext[c]()
+    );
 
     document.addEventListener("DOMContentLoaded", function () {
-        !window.pjaxSerialNumber && postContext.initHighlighting();
-        !window.pjaxSerialNumber && postContext.initClipboard();
+        Object.keys(postContext).forEach(
+            (c) => !window.pjaxSerialNumber && !advances.includes(c) && postContext[c]()
+        );
     });
 })();

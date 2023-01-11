@@ -1,4 +1,25 @@
 <style>
+    <#assign fontSrc=(settings.web_font?? && settings.web_font!='default')?then((settings.web_font=='custom')?then((settings.custom_font?? && settings.custom_font!='')?then(settings.custom_font, ''), '${theme_base!}/source/font/${settings.web_font}'), '')>
+    <#if fontSrc!=''>
+      <#if fontSrc?ends_with(".woff")>
+      <#assign fontFormat="woff">
+      <#elseif fontSrc?ends_with(".woff2")>
+      <#assign fontFormat="woff2">
+      <#elseif fontSrc?ends_with(".ttf")>
+      <#assign fontFormat="truetype">
+      <#elseif fontSrc?ends_with(".eot")>
+      <#assign fontFormat="embedded-opentype">
+      <#elseif fontSrc?ends_with(".svg")>
+      <#assign fontFormat="svg">
+      </#if>
+    @font-face {
+        font-family: "Dream Font";
+        font-display: swap;
+        font-weight: 400;
+        src: url("${fontSrc!}")${(fontFormat??)?then(' format("${fontFormat}")', '')};
+    }
+
+    </#if>
     <#if settings.enable_gray_mode!false>
     html {
         filter: grayscale(1) !important;
@@ -57,7 +78,7 @@
     DreamConfig["document_visible_title"] = '${settings.document_visible_title}';
     </#if>
     <#if settings.enable_color_character!false>
-    DreamConfig["spark_input_content"] = ['${user.description?trim?replace('\n', '')}'<#if settings.color_character?? && settings.color_character?trim!=''>, '${settings.color_character?trim?replace('\n', "','")}'</#if>];
+    DreamConfig["spark_input_content"] = ['${user.description?trim?replace('\n', '')?js_string}'<#if settings.color_character?? && settings.color_character?trim!=''>, '${settings.color_character?trim?js_string?replace('\\n', "','")}'</#if>];
     </#if>
     <#if settings.website_time?? && settings.website_time!=''>
     DreamConfig["website_time"] = '${settings.website_time}';
@@ -65,8 +86,11 @@
     <#if settings.sidebar_notice?? && settings.sidebar_notice!='none'>
     DreamConfig["notice_show_mode"] = '${settings.notice_show_mode!'index'}';
     </#if>
+    <#if settings.img_fold_height?? && settings.img_fold_height?number gte 400>
+    DreamConfig["img_fold_height"] = ${settings.img_fold_height};
+    </#if>
     <#if settings.journals_fold_height?? && settings.journals_fold_height?number gte 260>
-    DreamConfig["journals_fold_height"] =${settings.journals_fold_height};
+    DreamConfig["journals_fold_height"] = ${settings.journals_fold_height};
     </#if>
     <#if settings.cursor_move?? && settings.cursor_move!='none'>
     DreamConfig["cursor_move"] = '${settings.cursor_move}';
@@ -89,12 +113,19 @@
     <#if settings.load_progress?? && settings.load_progress != 'none'>
     DreamConfig["load_progress"] = '${settings.load_progress}';
     </#if>
+    <#if settings.journals_share_image?? && settings.journals_share_image != 'none'>
+    DreamConfig["journals_share_image"] = '${settings.journals_share_image}';
+    </#if>
+    <#if settings.meting_api?? && settings.meting_api != ''>
+    var meting_api = '${settings.meting_api}';
+    </#if>
     /** 看板娘相关配置 */
     <#if settings.enable_live2d!true>
     DreamConfig["live2d_url"] = '/source/lib/live2d/autoload.js';
     <#if settings.live2d_about_page?? && settings.live2d_about_page!=''>
     DreamConfig["live2d_about_page"] = '${settings.live2d_about_page}';
     </#if>
+    DreamConfig["live2d_model_url"] = '${settings.live2d_model_url!'https://unpkg.com/live2d-widget-model@1.0.0/'}';
     DreamConfig["live2d_edge_side"] = '${settings.live2d_edge_side!'right:50'}';
     DreamConfig["live2d_waifu_size"] = '${settings.live2d_waifu_size!'280x260'}';
     </#if>
@@ -103,14 +134,12 @@
     DreamConfig["default_theme"] = '${settings.default_theme!'light'}';
 
     (function(){
-        let isNight = localStorage.getItem('night');
-        if (isNight) {
-            if (isNight.toString() === 'true') {
-                document.documentElement.classList.add('night');
-            }
-        } else if (DreamConfig.default_theme === 'night') {
-            localStorage.setItem('night', true);
+        let isNight = DreamConfig.default_theme === 'system'? matchMedia('(prefers-color-scheme: dark)').matches : localStorage.getItem('night') || DreamConfig.default_theme === 'night';
+        if (isNight.toString() === 'true') {
+            localStorage.setItem('night', 'true');
             document.documentElement.classList.add('night');
+        } else {
+          localStorage.setItem('night', 'false');
         }
     })();
 </script>

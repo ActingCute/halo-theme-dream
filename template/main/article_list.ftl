@@ -1,11 +1,12 @@
 <#macro article_list posts>
     <#list posts as post>
-        <#assign thumbnail_mode = (post.thumbnail?? && post.thumbnail!='')?then((post.metas?? && post.metas.thumbnail_mode?? && post.metas.thumbnail_mode?trim!='')?then(post.metas.thumbnail_mode?trim, (post.topPriority==1)?then(settings.top_thumbnail_mode!'back', settings.thumbnail_mode!'default')), 'default')>
+        <#assign thumbnail = (post.thumbnail?? && post.thumbnail!='')?then(post.thumbnail!, (settings.default_thumbnail?? && settings.default_thumbnail!='')?then(settings.default_thumbnail + settings.default_thumbnail?contains('?')?then("&","?") + "postId=" + post.id?c, ''))>
+        <#assign thumbnail_mode = (thumbnail?? && thumbnail!='')?then((post.metas?? && post.metas.thumbnail_mode?? && post.metas.thumbnail_mode?trim!='')?then(post.metas.thumbnail_mode?trim, (post.topPriority==1)?then(settings.top_thumbnail_mode!'back', settings.thumbnail_mode!'default')), 'default')>
         <div class="card widget">
             <#if thumbnail_mode == "back">
                 <div class="cover">
                     <a href="${post.fullPath!}">
-                        <div class="cover-image" style="background-image: url(${post.thumbnail!})">
+                        <div class="cover-image" style="background-image: url(${thumbnail!})">
                         </div>
                         <div class="details">
                             <h2 class="title"><#if post.topPriority==1><span class="top">置顶</span></#if>${post.title!}</h2>
@@ -30,7 +31,7 @@
                 </div>
             <#elseif thumbnail_mode == "small" || (thumbnail_mode == "small-alter" && post_index%2 == 0)>
                 <div class="card-small">
-                    <a href="${post.fullPath!}"><div class="small-image" style="background-image: url(${post.thumbnail!})"></div></a>
+                    <a href="${post.fullPath!}"><div class="small-image" style="background-image: url(${thumbnail!})"></div></a>
                     <div class="card-content main">
                         <h2 class="title">
                             <#if post.topPriority==1><span class="top">置顶</span></#if><a
@@ -86,12 +87,12 @@
                             </#if>
                         </div>
                     </div>
-                    <a href="${post.fullPath!}"><div class="small-image" style="background-image: url(${post.thumbnail!})"></div></a>
+                    <a href="${post.fullPath!}"><div class="small-image" style="background-image: url(${thumbnail!})"></div></a>
                 </div>
             <#else>
-                <#if post.thumbnail?? && post.thumbnail!=''>
+                <#if thumbnail?? && thumbnail!=''>
                     <a class="thumbnail" href="${post.fullPath!}">
-                        <div class="thumbnail-image" style="background-image: url(${post.thumbnail!})">
+                        <div class="thumbnail-image" style="background-image: url(${thumbnail!})">
                         </div>
                     </a>
                 </#if>

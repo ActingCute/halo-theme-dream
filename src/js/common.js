@@ -1,4 +1,4 @@
-window.encryption = (str) => window.btoa(unescape(encodeURIComponent(str)));
+window.encrypt = (str) => window.btoa(unescape(encodeURIComponent(str)));
 window.decrypt = (str) => decodeURIComponent(escape(window.atob(str)));
 
 const commonContext = {
@@ -31,22 +31,47 @@ const commonContext = {
             $('.widget.notice').removeClass("is-hidden-all");
         }
     },
+    /* 更新横幅大图的文字描述 */
+    initBanner() {
+        const $bannerInfoDesc = $('.banner-info-desc')
+        if ($bannerInfoDesc.length === 0) return
+        const bannerDesc = $bannerInfoDesc.text()
+        $bannerInfoDesc.text('')
+        let currentBannerDesc = ''
+        let isWrite = true
+        let id
+        const updateDesc = function () {
+            let num = currentBannerDesc.length
+            if (isWrite && num < bannerDesc.length) {
+                currentBannerDesc += bannerDesc.charAt(num)
+                $bannerInfoDesc.text(currentBannerDesc)
+            } else if (!isWrite && num > 0) {
+                currentBannerDesc = currentBannerDesc.slice(0, num - 1)
+                $bannerInfoDesc.text(currentBannerDesc)
+            } else {
+                clearInterval(id)
+                isWrite = !isWrite
+                id = setInterval(updateDesc, isWrite? 500 : 80)
+            }
+        }
+        id = setInterval(updateDesc, isWrite? 500 : 80)
+    },
     /* widget固定底部 */
     widgetFixedBottom() {
         const columnLeft = $(".left-bottom")[0];
         const columnRight = $(".right-bottom")[0];
 
         function leftSetBottom() {
-            if ($(window).width() < 769) {
+            if (window.innerWidth < 769) {
                 columnLeft.style.top = null
             } else {
-                columnLeft.style.top = $(window).height() - columnLeft.scrollHeight - 10 + "px";
+                columnLeft.style.top = window.innerHeight - columnLeft.scrollHeight - 10 + "px";
             }
         }
 
         function rightSetBottom() {
-            if ($(window).width() >= 1216) {
-                columnRight.style.top = $(window).height() - columnRight.scrollHeight - 10 + "px";
+            if (window.innerWidth >= 1216) {
+                columnRight.style.top = window.innerHeight - columnRight.scrollHeight - 10 + "px";
             }
         }
 
@@ -62,32 +87,32 @@ const commonContext = {
         // 用链接和标题包装图像
         $('.main-content img:not(.not-gallery)').each(function () {
             if ($(this).parents('[data-fancybox],mew-photos').length === 0) {
-                $(this).wrap($(`<span class="gallery-item" data-fancybox="gallery" ${this.alt ? "data-caption=\"" + this.alt + "\"" : ""} href="${$(this).attr('src')}"></span>`));
-                if (this.alt) {
-                    $(this).after(`<p>${this.alt}</p>`);
-                }
+                $(this).wrap(`<div class="gallery-item"><div data-fancybox="gallery" ${this.alt ? `data-caption="${this.alt}"` : ""} href="${$(this).attr('src')
+                }"></div>${this.alt ? `<p>${this.alt}</p>` : ""}</div>`);
             }
         });
     },
     /* 初始化主题模式（仅用户模式） */
     initMode() {
         let isNight = localStorage.getItem('night') || false;
-        const applyNight = (value) => {
-            if (value.toString() === 'true') {
+        const applyNight = (isNightValue) => {
+            if (isNightValue) {
                 document.documentElement.classList.add('night');
             } else {
                 document.documentElement.classList.remove('night');
             }
-        }
-        $("#toggle-mode").on('click', function () {
-            isNight = isNight.toString() !== 'true';
-            applyNight(isNight);
             $("halo-comment").each(function () {
                 const shadowDom = this.shadowRoot.getElementById("halo-comment");
-                $(shadowDom)[`${isNight ? "add" : "remove"}Class`]("night");
+                $(shadowDom)[`${isNightValue ? "add" : "remove"}Class`]("night");
             })
-            localStorage.setItem('night', isNight);
-        });
+            localStorage.setItem('night', isNightValue);
+            isNight = isNightValue
+        }
+        $("#toggle-mode").on('click', () => applyNight(isNight.toString() !== 'true'));
+        if (DreamConfig.default_theme === 'system') {
+            window.matchMedia('(prefers-color-scheme: dark)')
+              .addListener((event) => applyNight(event.matches));
+        }
     },
     /* 导航条高亮 */
     initNavbar() {
@@ -295,15 +320,24 @@ const commonContext = {
     },
     /* 初始化事件 */
     initEvent() {
-        $("body").on("click", ".click-close", function (e) {
+        let $body = $('body')
+
+        function closeSelect(elem) {
+            let $elem = $(elem)
+            const closeSelect = $elem.attr('data-close');
+            return closeSelect && closeSelect.trim() !== '' ? $elem.closest(closeSelect.trim()) : $elem;
+        }
+
+        $body.on("click", ".click-close", function (e) {
             e.stopPropagation();
-            const closeSelect = $(this).attr('data-close').trim();
-            if (closeSelect && closeSelect !== '') {
-                $(this).closest(closeSelect).remove();
-            } else {
-                $(this).closest().remove();
-            }
+            closeSelect(this).remove();
         });
+        $body.on('click', '.click-animation-close', function (e) {
+            e.stopPropagation();
+            let selectElem = closeSelect(this);
+            selectElem.addClass('close-animation')
+            setTimeout(()=>selectElem.remove(), 300);
+        })
     },
     /* 离屏提示 */
     offscreenTip() {
@@ -324,6 +358,7 @@ const commonContext = {
     },
     /* 个人信息界面打印彩字 */
     sparkInput() {
+        console.log()
         const sparkInputContent = DreamConfig.spark_input_content && DreamConfig.spark_input_content.filter(s => s.length > 0);
         if (sparkInputContent && sparkInputContent.length > 0) {
             Utils.cachedScript(`${DreamConfig.theme_base}/source/js/spark-input.min.js`, function () {
@@ -364,7 +399,7 @@ const commonContext = {
                 hours = "0" + hours;
             }
             let days = parseInt(difference / 24);
-            websiteDate.innerHTML = `建站<span class="stand">${days}</span>天<span class="stand">${hours}</span>小时<span class="stand">${minutes}</span>分<span class="stand">${seconds}</span>秒`
+            websiteDate.innerHTML = `建站<span class="stand">${days}</span>天<span class="stand">${hours}</span>时<span class="stand">${minutes}</span>分<span class="stand">${seconds}</span>秒`
         }, 1000);
     },
     /* 初始化特效，只需要初始化一次，移动端设备不初始化 */
@@ -380,6 +415,11 @@ const commonContext = {
     loadMaintain() {
         DreamConfig.enable_baidu_push && Utils.baiduPush();
         DreamConfig.enable_toutiao_push && Utils.toutiaoPush();
+    },
+    /* 显示主题版本信息 */
+    showThemeVersion() {
+        window.logger(`%c页面加载耗时：${Math.round(performance.now())}ms | Theme By Dream ${DreamConfig.theme_version}`,
+            "color:#fff; background: linear-gradient(270deg, #986fee, #8695e6, #68b7dd, #18d7d3); padding: 8px 15px; border-radius: 0 15px 0 15px");
     }
 }
 
@@ -387,7 +427,7 @@ window.commonContext = commonContext;
 
 !(function () {
     const loads = ["sparkInput", "websiteTime"];
-    const omits = ["initEffects", "loadMaintain"];
+    const omits = ["initEffects", "loadMaintain", "showThemeVersion"];
 
     Object.keys(commonContext).forEach(
         (c) => !loads.includes(c) && !omits.includes(c) && commonContext[c]()
@@ -395,6 +435,7 @@ window.commonContext = commonContext;
 
     // 当前html加载完执行
     document.addEventListener("DOMContentLoaded", function () {
+        $("html").addClass("loaded");
         loads.forEach((c) => commonContext[c] && commonContext[c]());
     });
 
