@@ -43,7 +43,7 @@ basic_info:
       name: record_number_ps
       label: 公安部备案
       type: text
-      placeholder: '公安部备案号'
+      placeholder: "X公网安备 XXXXXXXXXXXXXX号"
     website_time:
       name: website_time
       label: 建站时间
@@ -105,7 +105,28 @@ basic_style:
       name: night_background_mobile
       label: 黑夜移动端背景图
       type: attachment
-      placeholder: '图片url链接'
+      placeholder: "图片url链接"
+    enable_banner:
+      name: enable_banner
+      label: 开启博客横幅大图
+      type: switch
+      data-type: bool
+      default: false
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    banner_image:
+      name: banner_image
+      label: 横幅背景图
+      type: attachment
+      placeholder: "图片url链接"
+    banner_description:
+      name: banner_description
+      label: 横幅文字描述
+      type: text
+      placeholder: "文字内容"
     default_theme:
       name: default_theme
       label: 默认主题模式
@@ -117,7 +138,7 @@ basic_style:
           label: 明亮主题
         - value: "night"
           label: 黑暗主题
-        - value: 'system'
+        - value: "system"
           label: 跟随系统
     theme_color:
       name: theme_color
@@ -129,8 +150,25 @@ basic_style:
       name: night_theme_color
       label: 黑夜主题色
       type: color
-      default: '#5d93db'
-      placeholder: '黑夜模式下的主题颜色'
+      default: "#5d93db"
+      placeholder: "黑夜模式下的主题颜色"
+    web_font:
+      name: web_font
+      label: 博客字体
+      type: select
+      default: "default"
+      options:
+        - value: "default"
+          label: 默认字体
+        - value: "WenCang.woff2"
+          label: 问藏书房体
+        - value: "custom"
+          label: 自定义
+    custom_font:
+      name: custom_font
+      label: 自定义博客字体链接
+      type: attachment
+      description: "自定义博客字体，在“博客字体”选项为“自定义“时生效。支持 woff2/woff/ttf/eot/svg 格式的字体文件链接，建议使用 woff2 格式。"
     sidebar_column:
       name: sidebar_column
       label: 侧边栏布局方式
@@ -174,8 +212,8 @@ post:
       name: default_thumbnail
       label: 默认文章缩略图
       type: attachment
-      placeholder: '图片url地址'
-      description: '如果文章没有指定缩略图，则默认显示当前缩略图'
+      placeholder: "图片url地址"
+      description: "如果文章没有指定缩略图，则默认显示当前缩略图"
     top_thumbnail_mode:
       name: top_thumbnail_mode
       label: 置顶文章列表缩略图模式
@@ -354,9 +392,21 @@ post:
       name: code_fold_line
       label: 代码块折叠
       type: text
-      default: 50
-      placeholder: '触发折叠的代码行数'
-      description: '代码行数超出指定行数后默认进行折叠，指定的行数需大于等于20。'
+      placeholder: "触发折叠的代码行数"
+      description: "代码行数超出指定行数后默认进行折叠，指定的行数需大于等于20。"
+    img_fold_height:
+      name: img_fold_height
+      label: 正文长图折叠
+      type: text
+      placeholder: "触发折叠的图片高度（px）"
+      description: "图片高度超出指定高度后默认进行折叠，指定的高度需大于等于400px。"
+    invalid_tips_day:
+      name: invalid_tips_day
+      label: 文章失效提示
+      type: text
+      default: 99999999
+      placeholder: "填写时间（天）"
+      description: "文章超过指定天数未进行更新，展示文章或图片可能失效的温馨提示。"
     enable_katex:
       name: enable_katex
       label: KaTeX 公式支持
@@ -440,7 +490,54 @@ comment:
       label: 默认展开的二级回复数量
       type: text
       default: 6
-      placeholder: '默认展开的二级回复数量'
+      placeholder: "默认展开的二级回复数量"
+    enable_bullet_screen:
+      name: enable_bullet_screen
+      label: 开启评论弹幕
+      type: radio
+      data-type: bool
+      default: false
+      description: "如果文章或页面元数据配置了“enable_bullet_screen”项，则当前配置将被覆盖。"
+      options:
+        - value: true
+          label: 默认开启
+        - value: false
+          label: 默认关闭
+    enable_image_upload:
+      name: enable_image_upload
+      label: 启用图片上传
+      type: switch
+      data-type: bool
+      description: "启用评论区内置的图片上传功能。"
+      default: false
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    reply_desc_soft:
+      name: reply_desc_soft
+      label: 回复列表按时间降序
+      type: switch
+      data-type: bool
+      description: "评论中的二级评论按回复时间降序排序（默认为升序）。"
+      default: false
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
+    autoload_comment:
+      name: autoload_comment
+      label: 自动加载评论列表
+      type: switch
+      data-type: bool
+      default: true
+      options:
+        - value: true
+          label: 开启
+        - value: false
+          label: 关闭
     show_comment_ua:
       name: show_comment_ua
       label: 显示评论的UA信息
@@ -481,14 +578,14 @@ comment:
       name: avatar_loading
       label: 头像加载动画
       type: attachment
-      placeholder: '图片url链接'
-      description: '加载用户头像时的加载动画。'
+      placeholder: "图片url链接"
+      description: "加载用户头像时的加载动画。"
     default_avatar:
       name: default_avatar
       label: 默认评论头像
       type: attachment
-      placeholder: '图片url链接'
-      description: '如果用户头像加载失败，则显示默认头像。'
+      placeholder: "图片url链接"
+      description: "如果用户头像加载失败，则显示默认头像。"
     enable_qq_info:
       name: enable_qq_info
       label: 获取QQ昵称和头像
@@ -530,8 +627,8 @@ honorofkings:
       name: honorofkings_api
       label: "honorofkings_api"
       type: text
-      default: https://haibarai.com/timi
-      placeholder: 请输入API地址，默认 https://haibarai.com/timi。
+      default: /timi
+      placeholder: 请输入API地址，默认 /timi。
       description: "后台地址，用于获取数据，处理数据"
 bilibili:
   label: 追番模块
@@ -550,8 +647,8 @@ bilibili:
       name: bilibili_api
       label: "bilibili_api"
       type: text
-      default: https://haibarai.com/bilibili
-      placeholder: 请输入API地址，默认 https://haibarai.com/bilibili
+      default: /bilibili
+      placeholder: 请输入API地址，默认 /bilibili
       description: "后台地址，用于获取数据，处理数据"
 profile:
   label: 信息模块
@@ -609,12 +706,13 @@ profile:
       name: profile_location
       label: 地理位置
       type: text
-      placeholder: '个人所在地'
-    profile_follow_url:
-      name: profile_follow_url
-      label: (关注我)按钮地址
+      placeholder: "个人所在地"
+    profile_theme_button:
+      name: profile_theme_button
+      label: 主题按钮
       type: text
-      placeholder: '默认为博客地址'
+      placeholder: 链接地址
+      description: "需要“按钮名称”和“按钮地址”两个参数，参数间用“|”分隔，放空则不显示主题按钮。"
     social_github:
       name: social_github
       label: Github
@@ -649,12 +747,7 @@ profile:
       name: social_telegram
       label: Telegram
       type: text
-      placeholder: 'Telegram 用户名'
-    social_csdn:
-      name: social_csdn
-      label: CSDN
-      type: text
-      placeholder: 'CSDN 主页'
+      placeholder: "Telegram 用户名"
     social_rss:
       name: social_rss
       label: "RSS 订阅"
@@ -815,7 +908,7 @@ music:
       name: meting_api
       label: 自建API
       type: text
-      placeholder: '自建API的请求路径'
+      placeholder: "自建API的请求路径"
       description: '自建API方法见文档：<a href="https://github.com/metowolf/Meting" target="_blank">Meting</a>'
     music_mode:
       name: music_mode
@@ -1297,12 +1390,11 @@ other_page:
       name: journals_fold_height
       label: 日志页面-动态内容折叠
       type: text
-      default: 500
-      placeholder: '触发折叠的动态内容高度（px）'
-      description: '动态内容高度超出指定高度后默认进行折叠，指定的高度需大于等于260px。'
-    enable_tags_tag_color:
-      name: enable_tags_tag_color
-      label: 标签页面-开启标签颜色
+      placeholder: "触发折叠的动态内容高度（px）"
+      description: "动态内容高度超出指定高度后默认进行折叠，指定的高度需大于等于260px。"
+    enable_journals_comment:
+      name: enable_journals_comment
+      label: 日志页面-开启评论区
       type: switch
       data-type: bool
       default: true
@@ -1326,7 +1418,7 @@ other_page:
       name: journals_share_image
       label: 日志页面-日志分享背景图
       type: attachment
-      placeholder: '图片url'
+      placeholder: "图片url"
     enable_tags_tag_color:
       name: enable_tags_tag_color
       label: 标签页面-开启标签颜色
@@ -1356,9 +1448,9 @@ live2d:
       name: live2d_model_url
       label: 模型地址
       type: text
-      default: 'https://unpkg.com/live2d-widget-model@1.0.0/'
-      placeholder: '模型url地址'
-      description: 'live2d模型和api地址，可通过克隆模型仓库实现自建地址。'
+      default: "https://unpkg.com/live2d-widget-model@1.0.0/"
+      placeholder: "模型url地址"
+      description: "live2d模型和api地址，可通过克隆模型仓库实现自建地址。"
     live2d_about_page:
       name: live2d_about_page
       label: “关于”按钮的url地址
