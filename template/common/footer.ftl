@@ -12,25 +12,19 @@
                         ${blog_title!}
                     </#if>
                 </a>
-                <p>&copy; ${.now?string('yyyy')} ${user.nickname!} Powered by <a class="powered"
-                                                                                 href="https://halo.run/"
-                                                                                 target="_blank">Halo</a> & <a
-                            class="powered" href="https://github.com/nineya/halo-theme-dream" target="_blank">Dream</a>
-                </p>
-                <#if settings.record_number?? && settings.record_number!=''>
-                    <p><a href="http://beian.miit.gov.cn/publish/query/indexFirst.action"
-                          target="_blank" rel="noopener noreferrer nofollow">${settings.record_number!}</a></p>
-                </#if>
-                <#if settings.record_number_ps?? && settings.record_number_ps!=''>
-                    <p><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=${settings.record_number_ps!}"
-                          target="_blank" rel="noopener noreferrer nofollow"><img src="https://www.beian.gov.cn/portal/download" alt="公安备案" style="vertical-align: text-top; width: 1.2em"/>公安备案：${settings.record_number_ps!}</a></p>
-                </#if>
-                <#if settings.website_time?? && settings.website_time!=''>
-                    <p id="websiteDate"></p>
-                </#if>
-                <#if settings.enable_busuanzi!true>
-                    <p>
-                        <span id="busuanzi_container_site_uv">
+            </li>
+            <li>
+                <p class="icon-spot">
+                    <span>&copy; ${.now?string('yyyy')} ${user.nickname!}</span><#if settings.record_number?? && settings.record_number!=''><a href="http://beian.miit.gov.cn/publish/query/indexFirst.action" target="_blank" rel="noopener noreferrer nofollow">${settings.record_number!
+                    }</a></#if><span class="footer-truncation">Powered by <a class="powered" href="https://halo.run/" target="_blank">Halo</a> & <a class="powered" href="https://github.com/nineya/halo-theme-dream" target="_blank">Dream</a></span></p>
+                <#if (settings.website_time?? && settings.website_time!='') || settings.enable_busuanzi!true>
+                    <p class="icon-spot">
+                    <#if settings.website_time?? && settings.website_time!=''>
+                        <span id="websiteDate">建站<span class="stand">00</span>天<span class="stand">0</span>时<span class="stand">0</span>分<span class="stand">0</span>秒</span>
+                    </#if>
+                    <#if settings.enable_busuanzi!true>
+                        <span class="icon-spot footer-truncation">
+                            <span id="busuanzi_container_site_uv" style="display: none">
                             <i class="fa fa-user" aria-hidden="true"></i>
 					        <span class="stand" id="busuanzi_value_site_uv">0</span>访客
 					        </span>
