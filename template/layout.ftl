@@ -1,4 +1,4 @@
-<#global theme_version="cfbfae89cebe1ff4aa4235dbfc4f01e2cb4db279">
+<#global theme_version="12222222">
 <#macro layout0 title,canonical>
     <#if RequestParameters?? && RequestParameters._pjax?? >
         <#global is_pjax=RequestParameters._pjax>
