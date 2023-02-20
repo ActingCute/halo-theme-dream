@@ -2,7 +2,7 @@
  * @Author: ActingCute酱 rem486@qq.com
  * @Date: 2022-10-02 13:38:43
  * @LastEditors: ActingCute酱 rem486@qq.com
- * @LastEditTime: 2023-02-21 00:16:59
+ * @LastEditTime: 2023-02-21 00:27:02
  * @FilePath: \halo-theme-dream\README.md
  * @Description: 说明
 -->
@@ -97,7 +97,7 @@
 
 ### 拉取原仓库代码
 
-    git remote add upstream fork https://github.com/nineya/halo-theme-dream.git
+    git remote add upstream https://github.com/nineya/halo-theme-dream.git
     git pull upstream
     # 将原仓库代码合到自己仓库
     git merge upstream/master

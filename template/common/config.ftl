@@ -63,6 +63,10 @@
     </#if>
 </style>
 <script type="text/javascript">
+    window.logger = console.log;
+    <#if !(settings.enable_debug!false)>
+    console.log = function () {};
+    </#if>
     /** 主题配置 */
     const DreamConfig = {};
     DreamConfig["theme_version"] = '${theme_version!}';
@@ -104,6 +108,9 @@
     <#if settings.effects_universe_mode?? && settings.effects_universe_mode!='none'>
     DreamConfig["effects_universe_mode"] = '${settings.effects_universe_mode}';
     </#if>
+    <#if settings.effects_circle_magic_mode?? && settings.effects_circle_magic_mode!='none'>
+    DreamConfig["effects_circle_magic_mode"] = '${settings.effects_circle_magic_mode}';
+    </#if>
     <#if settings.enable_baidu_push!false>
     DreamConfig["enable_baidu_push"] = true;
     </#if>
@@ -121,13 +128,26 @@
     </#if>
     /** 看板娘相关配置 */
     <#if settings.enable_live2d!true>
-    DreamConfig["live2d_url"] = '/source/lib/live2d/autoload.js';
+    DreamConfig["enable_live2d"] = true;
     <#if settings.live2d_about_page?? && settings.live2d_about_page!=''>
     DreamConfig["live2d_about_page"] = '${settings.live2d_about_page}';
     </#if>
-    DreamConfig["live2d_model_url"] = '${settings.live2d_model_url!'https://unpkg.com/live2d-widget-model@1.0.0/'}';
+    DreamConfig["live2d_model_url"] = '${settings.live2d_model_url!'https://unpkg.com/live2d-widget-model@1.0.1/'}';
+    DreamConfig["live2d_tips_url"] = '${settings.live2d_tips_url!'/themes/dream/source/lib/live2d@1.0.1/waifu-tips.json'}';
     DreamConfig["live2d_edge_side"] = '${settings.live2d_edge_side!'right:50'}';
     DreamConfig["live2d_waifu_size"] = '${settings.live2d_waifu_size!'280x260'}';
+    DreamConfig["live2d_model_id"] = '${settings.live2d_model_id!'0'}';
+    DreamConfig["live2d_model_textures_id"] = '${settings.live2d_model_textures_id!'0'}';
+    DreamConfig["live2d_show_tool_menu"] = ${(settings.live2d_show_tool_menu!true)?c};
+    DreamConfig["live2d_can_turn_to_home_page"] = ${(settings.live2d_can_turn_to_home_page!true)?c};
+    DreamConfig["live2d_can_switch_hitokoto"] = ${(settings.live2d_can_switch_hitokoto!true)?c};
+    DreamConfig["live2d_can_switch_model"] = ${(settings.live2d_can_switch_model!true)?c};
+    DreamConfig["live2d_can_switch_textures"] = ${(settings.live2d_can_switch_textures!true)?c};
+    DreamConfig["live2d_can_take_screenshot"] = ${(settings.live2d_can_take_screenshot!true)?c};
+    DreamConfig["live2d_can_turn_to_about_page"] = ${(settings.live2d_can_turn_to_about_page!true)?c};
+    DreamConfig["live2d_can_close_live2d"] = ${(settings.live2d_can_close_live2d!true)?c};
+    DreamConfig["live2d_model_rand_mode"] = '${settings.live2d_model_rand_mode!'switch'}';
+    DreamConfig["live2d_model_textures_rand_mode"] = '${settings.live2d_model_textures_rand_mode!'rand'}';
     </#if>
 
     /** 配置主题模式 */

@@ -21,7 +21,7 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-body>.footer, body>.navbar, body>.section {
+body > .footer, body > .navbar, body > .section {
   opacity: 0;
   transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 }
@@ -51,7 +51,7 @@ html {
   text-size-adjust: 100%;
 
   &.loaded {
-    body>.footer, body>.navbar, body>.section {
+    body > .footer, body > .navbar, body > .section {
       opacity: 1;
     }
 
@@ -1390,7 +1390,7 @@ table td, table th {
     bottom: 0;
     fill: var(--background);
 
-    .parallax >use {
+    .parallax > use {
       animation: move-forever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
 
       &:first-child {
@@ -1663,8 +1663,16 @@ table td, table th {
       display: flex;
 
       & > a {
-        width: 30%;
+        width: 34%;
         overflow: hidden;
+
+        &:first-child {
+          clip-path: polygon(0 0, 90% 0, 100% 100%, 0 100%)
+        }
+
+        &:last-child {
+          clip-path: polygon(0 0, 100% 0, 100% 100%, 10% 100%);
+        }
       }
 
       .small-image {
@@ -1677,7 +1685,7 @@ table td, table th {
       }
 
       .card-content {
-        width: 70%;
+        width: 66%;
       }
 
       .title {
@@ -1690,9 +1698,9 @@ table td, table th {
       }
 
       .main-content {
-        -webkit-line-clamp: 3 !important;
-        min-height: 4em;
-        max-height: 4.8em;
+        -webkit-line-clamp: 2 !important;
+        min-height: 2.5em;
+        max-height: 3.3em;
       }
     }
 
@@ -1823,7 +1831,7 @@ table td, table th {
     margin-right: 0;
   }
 
-  &#profile {
+  &.profile {
     figure {
       width: 98px;
       height: 98px;
@@ -1961,7 +1969,7 @@ table td, table th {
     }
   }
 
-  &#comment {
+  &.recent-comments {
     li:not(:last-child) {
       margin-bottom: 10px;
       border-bottom: 1px dashed var(--light-b);
@@ -2045,7 +2053,7 @@ table td, table th {
     }
   }
 
-  .recent-post {
+  &.recent-posts .card-content {
 
     .list {
       padding-top: 1px;
@@ -2108,7 +2116,7 @@ table td, table th {
     }
   }
 
-  .tags {
+  &.tags .card-content {
     font-size: 0;
 
     a {
@@ -2135,8 +2143,106 @@ table td, table th {
     }
   }
 
-  .tagcloud a:hover {
+  &.tagcloud .card-content a:hover {
     color: var(--dark-c) !important;
+  }
+
+  &.love {
+    position: relative;
+    color: #fff;
+    background: none !important;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: -1;
+      transition: all 0.3s ease-out;
+      background-image: linear-gradient(to right, rgb(255 209 218 / 94%), rgb(255 162 178 / 94%));
+    }
+
+    &:after {
+      content: 'LOVE';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      z-index: -1;
+      color: #ffe0e5;
+      font-size: 84px;
+      line-height: 84px;
+      text-align: center;
+      font-weight: 600;
+      white-space: nowrap;
+      transform: rotate(90deg) translateY(75%);
+      transition: all 0.3s ease-out;
+    }
+
+    &:hover {
+      &:before {
+        background-image: linear-gradient(to right, #ffd1da, #ffa2b2);
+      }
+
+      &:after {
+        transform: rotate(90deg) translateY(60%);
+      }
+    }
+
+    .card-title {
+      border-bottom: 1px solid rgb(255 209 218 / 94%);
+    }
+
+    .love-content {
+      display: flex;
+      margin: 16px 0;
+      justify-content: center;
+    }
+
+    .level {
+      flex: auto;
+      display: flex;
+      max-width: 520px;
+
+      &-item {
+        flex-grow: 1;
+      }
+    }
+
+    svg {
+      width: 36px;
+      filter: none;
+    }
+
+    .avatar {
+      width: 84px;
+      height: 84px;
+      padding: 4px;
+      display: block;
+      border-radius: 50%;
+      background: #ffd6de;
+
+      &-image {
+        transition: all 2s;
+        height: 100%;
+        width: 100%;
+        border-radius: 50%;
+
+        &:hover {
+          transform: rotate(-360deg);
+        }
+      }
+    }
+
+    .love-time {
+      font-size: 1.1em;
+      text-align: center;
+      font-weight: 600;
+      height: 1.4em;
+      line-height: 1.4em;
+    }
   }
 }
 
@@ -2701,6 +2807,17 @@ table td, table th {
     border: none;
     cursor: pointer;
   }
+
+  & > .bullet-screen span {
+    display: inline-block;
+    line-height: 1;
+    font-weight: 600;
+    font-family: ui-serif, serif !important;
+  }
+
+  & > .stop-bullet-screen span {
+    background-image: linear-gradient(45deg, transparent 46%, #fff 46%, #fff 54%, transparent 54%);
+  }
 }
 
 .footer {
@@ -2749,7 +2866,7 @@ table td, table th {
         display: inline-block;
       }
 
-      &:not(:first-child)> *:not(:first-child):before {
+      &:not(:first-child) > *:not(:first-child):before {
         content: "";
         width: 4px;
         height: 4px;
@@ -2773,7 +2890,7 @@ table td, table th {
     .stand {
       color: var(--theme);
       margin: 0 4px;
-    };
+    }
 
     .powered {
       color: var(--theme);
@@ -2904,6 +3021,7 @@ table td, table th {
 
   .footer-container {
     text-align: center;
+
     & > li {
       display: block;
 
@@ -3064,6 +3182,12 @@ table td, table th {
 
 @media (min-width: 1408px) {
   .section .card {
+
+    .card-small .main-content {
+      -webkit-line-clamp: 3 !important;
+      min-height: 4em;
+      max-height: 4.8em;
+    }
 
     .cover-image {
       min-height: 260px;
@@ -3417,7 +3541,7 @@ table td, table th {
 }
 
 /* 友链界面 */
-.links {
+.links:not(.widget) {
   margin-bottom: 20px;
 
   .link-title {
@@ -3519,19 +3643,19 @@ table td, table th {
 }
 
 @media (max-width: 630px) {
-  .links ul li {
+  .links:not(.widget) ul li {
     width: 100% !important
   }
 }
 
 @media (max-width: 768px) {
-  .links ul li:before {
+  .links:not(.widget) ul li:before {
     display: none
   }
 }
 
 @media (max-width: 1600px) {
-  .links ul li {
+  .links:not(.widget) ul li {
     width: 48%
   }
 }
@@ -3670,7 +3794,7 @@ table td, table th {
         max-height: 100%;
         transform: translateY(calc(100% - 45px));
         transition: transform 0.35s ease-in;
-        background: linear-gradient(0deg,#151515cc,transparent 100%);
+        background: linear-gradient(0deg, #151515cc, transparent 100%);
 
         svg {
           width: 1.3em;
