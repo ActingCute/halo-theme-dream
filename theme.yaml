@@ -16,7 +16,7 @@ website: https://blog.nineya.com
 # 主题github开源地址
 repo: https://github.com/ActingCute/halo-theme-dream
 # 版本号
-version: 2.1.0
+version: d972b0aaf9876cf2193e3ab48c2374ad3de83e30
 # 最低支持的 Halo 版本
 require: 1.3.0
 # 文章页 meta 变量

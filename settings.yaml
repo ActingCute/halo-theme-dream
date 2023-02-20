@@ -1821,3 +1821,43 @@ custom:
       type: textarea
       placeholder: JS代码内容
       description: "填入JS代码，无需script标签，将插入body标签尾部。"
+honorofkings:
+  label: 王者荣耀模块
+  items:
+    honorofkings_is_show:
+      name: honorofkings_is_show
+      label: 是否开启
+      type: radio
+      default: none
+      options:
+        - value: block
+          label: 开启
+        - value: none
+          label: 关闭
+    honorofkings_api:
+      name: honorofkings_api
+      label: "honorofkings_api"
+      type: text
+      default: /timi
+      placeholder: 请输入API地址，默认 /timi。
+      description: "后台地址，用于获取数据，处理数据"
+bilibili:
+  label: 追番模块
+  items:
+    bilibili_is_show:
+      name: bilibili_is_show
+      label: 是否开启
+      type: radio
+      default: none
+      options:
+        - value: block
+          label: 开启
+        - value: none
+          label: 关闭
+    bilibili_api:
+      name: bilibili_api
+      label: "bilibili_api"
+      type: text
+      default: /bilibili
+      placeholder: 请输入API地址，默认 /bilibili
+      description: "后台地址，用于获取数据，处理数据"
