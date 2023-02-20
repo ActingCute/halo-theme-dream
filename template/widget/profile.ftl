@@ -1,20 +1,18 @@
 <div class="card widget ${settings.hide_profile!}" id="profile">
     <div class="card-content">
         <nav class="level">
-            <div class="level-item has-text-centered" style="flex-shrink: 1">
-                <div>
-                    <figure class="image">
-                        <img class="avatar" src="${user.avatar!}" alt="${user.nickname!}">
-                    </figure>
-                    <p class="nickname">${user.nickname!}</p>
-                    <p class="motto spark-input">${user.description!}</p>
-                    <#if settings.profile_location?? && settings.profile_location!=''>
-                    <p class="address">
-                        <i class="fa fa-map-marker"></i>
-                        <span>${settings.profile_location!}</span>
-                    </p>
-                    </#if>
-                </div>
+            <div class="level-item" style="flex-direction: column;">
+              <figure class="image">
+                <img class="avatar" src="${user.avatar!}" alt="${user.nickname!}">
+              </figure>
+              <p class="nickname">${user.nickname!}</p>
+              <p class="motto spark-input">${user.description!}</p>
+                <#if settings.profile_location?? && settings.profile_location!=''>
+                  <p class="address">
+                    <i class="fa fa-map-marker"></i>
+                    <span>${settings.profile_location!}</span>
+                  </p>
+                </#if>
             </div>
         </nav>
         <nav class="level">
@@ -37,9 +35,12 @@
                 </div>
             </div>
         </nav>
-        <div class="level">
-            <a class="level-item button is-link is-rounded" href="${settings.profile_follow_url!'${context!}'}" target="_blank" rel="nofollow noopener noreferrer">关注我</a>
-        </div>
+        <#if settings.profile_theme_button?? && settings.profile_theme_button!=''>
+            <#assign profile_theme_button=settings.profile_theme_button?split('|')>
+            <div class="level">
+                <a class="level-item button is-link is-rounded" href="${profile_theme_button[1]!}" target="_blank" rel="nofollow noopener noreferrer">${profile_theme_button[0]!}</a>
+            </div>
+        </#if>
         <div class="level"><#if settings.social_github?? && settings.social_github!=''>
                 <a class="level-item button is-transparent" target="_blank" title="Github主页" href="https://github.com/${settings.social_github}" rel="nofollow noopener noreferrer">
                     <i class="fa fa-github"></i>
@@ -75,10 +76,19 @@
                     <i class="fa fa-telegram"></i>
                 </a>
             </#if>
-            <#if settings.social_csdn?? && settings.social_csdn!=''>
-                <a class="level-item button is-transparent" target="_blank" title="CSDN主页" href="${settings.social_csdn}" rel="nofollow noopener noreferrer">
-                    <i class="fa fa-copyright"></i>
-                </a>
+            <#if settings.custom_social_options?? && settings.custom_social_options!=''>
+                <#assign custom_social_options=settings.custom_social_options?split('\n')>
+                <#list custom_social_options as custom_social_option>
+                    <#assign social_option=custom_social_option?split('|')>
+                    <#assign social_name=(social_option[0]?? && social_option[0]?trim!='')?then(social_option[0]?trim,'')>
+                    <#assign social_logo=(social_option[1]?? && social_option[1]?trim!='')?then(social_option[1]?trim,'')>
+                    <#assign social_link=(social_option[2]?? && social_option[2]?trim!='')?then(social_option[2]?trim,'')>
+                    <#if social_name!='' || social_logo!='' || social_link!=''>
+                      <a class="level-item button is-transparent" target="_blank" title="${social_name}" href="${social_link}" rel="nofollow noopener noreferrer">
+                        <i class="${social_logo}"></i>
+                      </a>
+                    </#if>
+                </#list>
             </#if>
             <#if settings.social_rss!true >
                 <a class="level-item button is-transparent" target="_blank" title="RSS订阅" href="${rss_url!}">

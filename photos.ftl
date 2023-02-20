@@ -4,15 +4,15 @@
         <div class="card card-content photos">
             <div class="photos-title">我的相册</div>
             <ul class="photos-teams">
-                <li class="item active">全部</li>
+                <li class="item">全部</li>
                 <@photoTag method="listTeams">
                     <#list teams as item>
-                        <li class="item" data-team="${item.team}">${((item.team)?length>0)?then(item.team?trim,'默认图库')}</li>
+                        <li class="item" data-team="p-${item.team}">${((item.team)?length>0)?then(item.team?trim,'默认图库')}</li>
                     </#list>
                 </@photoTag>
             </ul>
         </div>
-        <div class="photos-gallery"></div>
+        <div class="photos-gallery load-block"></div>
     <#else>
         <div class="card card-empty">
             <i class="fa fa-inbox"></i>

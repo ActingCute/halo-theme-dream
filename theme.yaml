@@ -8,7 +8,7 @@ author:
   # 作者网址
   website: https://www.nineya.com
 # 主题描述
-description: '梦之城，童话梦境'
+description: "梦之城，童话梦境"
 # 主题logo地址
 logo: https://q1.qlogo.cn/g?b=qq&nk=361654768&s=640
 # 主题地址
@@ -16,7 +16,7 @@ website: https://blog.nineya.com
 # 主题github开源地址
 repo: https://github.com/ActingCute/halo-theme-dream
 # 版本号
-version: 07424f178b92de46deafd776858148944d13164
+version: bb9fae708ea06595c161e00091ecc4bccd9b9d25
 # 最低支持的 Halo 版本
 require: 1.3.0
 # 文章页 meta 变量
@@ -26,9 +26,11 @@ postMetaField:
   - tips
   - enable_katex
   - enable_share
+  - enable_bullet_screen
 # 自定义页 meta 变量
 sheetMetaField:
   - enable_copyright
   - tips
   - enable_katex
   - enable_share
+  - enable_bullet_screen

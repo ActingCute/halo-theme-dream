@@ -121,14 +121,13 @@
   </style>
      
     <div class="imgBox bilibili" id="bilibili" v-show="show">
-
       <div class="imgItem" v-for="(item,index) in bilibiliContents" :key="index+'bilibiliContents'">
         <!-- <div class="imgItem1"></div> -->
         <div class="imgItem1" v-bind:style="{ backgroundImage: 'url(' + item.img + ')' }"></div>
         <div class="descText">
           <div class="descText1">
             <div class="descText2">
-              <div class="des">{{item.des}}</div>
+              <div class="des" @click="window.open(item.link)">{{item.des}}</div>
               <div class="watched_progress_text">
                 <div class="watched_progress_text1">{{item.watched_progress_text}}</div>
                 <div class="watched_progress" :style="{width:'100%'}">

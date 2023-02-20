@@ -1,6 +1,6 @@
 {
   "name": "halo-theme-dream",
-  "version": "07424f178b92de46deafd776858148944d13164",
+  "version": "bb9fae708ea06595c161e00091ecc4bccd9b9d25",
   "description": "梦之城，童话梦境，动漫类型博客主题。",
   "main": "index.js",
   "author": "nineya",
@@ -47,6 +47,7 @@
     "webpack-stream": "^7.0.0"
   },
   "dependencies": {
-    "axios": "^0.27.2"
+    "html2canvas": "^1.4.1",
+    "qrcode": "^1.5.1"
   }
 }

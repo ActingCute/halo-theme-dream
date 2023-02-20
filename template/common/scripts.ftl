@@ -7,9 +7,11 @@
 <#if post?? || is_journals?? || is_error??>
     <script data-pjax src="${theme_base!}/source/lib/highlightjs@11.5.1/highlight.min.js"></script>
     <script data-pjax src="${theme_base!}/source/lib/clipboard@2.0.10/clipboard.min.js"></script>
-    <#if post??>
-        <script data-pjax src="${theme_base!}/source/js/post.min.js?mew=${theme_version!}"></script>
-    <#elseif is_journals??>
+    <#if enable_share>
+        <script data-pjax src="${theme_base!}/source/js/dshare.min.js"></script>
+    </#if>
+    <script data-pjax src="${theme_base!}/source/js/post.min.js?mew=${theme_version!}"></script>
+    <#if is_journals??>
         <script data-pjax src="${theme_base!}/source/js/journals.min.js?mew=${theme_version!}"></script>
     </#if>
 </#if>
@@ -23,7 +25,7 @@
 <#if (post?? && (!post.disallowComment!false) && (!settings.close_post_comment!false)) || (is_journals?? && settings.enable_journals_comment!true) || (is_links?? && (!settings.close_post_comment!false) && settings.link_comment_id?? && settings.link_comment_id!='' || settings.honorofkings_is_show?? && settings.honorofkings_is_show != 'none' || settings.bilibili_is_show?? && settings.bilibili_is_show != 'none')>
     <script data-pjax defer src="${theme_base!}/source/lib/vue@2.6.10/vue.min.js"></script>
     <script data-pjax defer
-            src="${(settings.enable_theme_comment!true)?then(theme_base + '/source/lib/halo-comment@1.0.6/halo-comment.min.js',
+            src="${(settings.enable_theme_comment!true)?then(theme_base + '/source/lib/halo-comment@1.0.7/halo-comment.min.js',
             options.comment_internal_plugin_js!'//cdn.jsdelivr.net/gh/halo-dev/halo-comment@latest/dist/halo-comment.min.js')}"></script>
 </#if>
 
@@ -34,7 +36,7 @@
 <script src="${theme_base!}/source/js/pjax.min.js?mew=${theme_version!}"></script>
 <script async src="${theme_base!}/source/lib/qmsg/qmsg.min.js"></script>
 
-<#if is_post?? || is_sheet?? || is_photos?? || is_journals?? >
+<#if post?? || is_photos?? || is_journals?? >
     <script data-pjax async src="${theme_base!}/source/lib/fancybox@5.3.7/jquery.fancybox.min.js"></script>
 </#if>
 
