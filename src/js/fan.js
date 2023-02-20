@@ -1,19 +1,13 @@
 /*
  * @Author: zhanghui rem486@qq.com
  * @Date: 2022-12-22 11:53:20
- * @LastEditors: zhanghui rem486@qq.com
- * @LastEditTime: 2022-12-22 15:38:10
+ * @LastEditors: ActingCute酱 rem486@qq.com
+ * @LastEditTime: 2023-01-08 20:56:19
  * @FilePath: \halo-theme-dream\src\js\fan.js
  * @Description: 说明
  */
 var bilibiliVue = null;
 var bilibili_api = $('#bilibili_api').val() || '/bilibili';
-
-axios.defaults.baseURL = bilibili_api;
-
-console.log({
-  bilibili_api
-});
 
 //初始化vue绑定
 const initBilibiliVue = function () {
@@ -44,7 +38,7 @@ const initBilibiliVue = function () {
         $('.bilibili').addClass('loading');
 
         let that = this
-        axios.get(`/1/10`).then(function (res) {
+        axios.get(bilibili_api +'/1/10').then(function (res) {
           that.setRecordData(res)
         })
       },
