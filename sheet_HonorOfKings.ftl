@@ -33,10 +33,10 @@
           top: 20px;
         }
 
-        .honorofkingsUserInfo .honorofkingsUserBox .avatarBox{
-          width:100%;
-          display:flex;
-          item-align:center;
+        .honorofkingsUserInfo .honorofkingsUserBox .avatarBox {
+          width: 100%;
+          display: flex;
+          item-align: center;
         }
 
         .honorofkingsUserInfo .honorofkingsUserBox .avatarBox .avatar {
@@ -45,16 +45,21 @@
           padding: 4px;
           background: var(--light-b);
           margin: 2em auto 0.5em auto;
-         }
-        
+        }
+
         .honorofkingsUserInfo .honorofkingsUserBox .avatarBox .avatar1 {
           width: 4.1rem;
           transition: all 2s;
-           margin: 2em auto 0.5em auto;
-         }
+          margin: 2em auto 0.5em auto;
+        }
 
         .honorofkingsContents {
           padding: 1rem;
+        }
+
+        .isEnd{
+          text-align: center;
+          margin-top: 1rem;
         }
 
         @media screen and (max-width: 1700px) {
@@ -94,7 +99,7 @@
             padding: 0
           }
         }
-        
+
         @media screen and (max-width: 375px) {
 
           .hisdata {
@@ -205,14 +210,12 @@
           margin-top: 1rem;
         }
 
-        .honorofkingsContentsItem{
-          position:relative;
+        .honorofkingsContentsItem {
+          position: relative;
         }
 
         /*弹窗*/
         .modal {}
-
- 
       </style>
       <div class="honorofkings" id="honorofkings">
         <#-- 个人信息 -->
@@ -225,7 +228,7 @@
                 <span v-show="!viewRole"> {{userInfo.name}}</span>
                 <span v-if="isLogin">
                   <span class="cur" style="color:blue" v-show="!viewRole" @click="toViewRole(true)">切换大区</span>
-                   <span id="modal" style="display:none" class="modal" v-show="viewRole">
+                  <span id="modal" style="display:none" class="modal" v-show="viewRole">
                     <select number v-model="loginData.loginType" @change="setRole">
                       <option value="0">平台</option>
                       <option value="1">微信</option>
@@ -302,39 +305,41 @@
       <#--历史战绩 -->
         <div class="card honorofkingsContents">
           <div class="honorofkingsContentsItem" v-for="(item,index) in honorofkingsContents" :key="index+'data'">
-              <#--  <img v-if="item.mvpImg.length" class="his_info_mvp1" width="40" src="//game.gtimg.cn/images/yxzj/web201605/page/icon_MVP.png">  -->
-            <div class="his_last_game" id="his_last_game10_1" style="">
-              <div class="his_last_linfo">
-                <div class="his_head_l">
-                  <img class="his_headimg" width="70" height="70" :src="item.hero" alt="">
-                </div>
-                <div class="his_info_m">
-                  <p>
-                    <span class="his_info_m_txt "
-                      :class="{'_faltxt':item.result != '胜利','_suctxt':item.result == '胜利'}">胜利</span>
-                    <span class="his_info_m_maptxt">{{item.type}}</span>
-                    <span class="his_info_m_timetxt">时长:<span class="gameduration">{{item.useTime}}</span>分钟</span>
-                  </p>
-
-                  <div style="width:250px;height: 25px;background-position:0 0;overflow: hidden;">
-                    <img class="hisdata" :src="item.kda" alt="">
+            <#-- <img v-if="item.mvpImg.length" class="his_info_mvp1" width="40"
+              src="//game.gtimg.cn/images/yxzj/web201605/page/icon_MVP.png"> -->
+              <div class="his_last_game" id="his_last_game10_1" style="">
+                <div class="his_last_linfo">
+                  <div class="his_head_l">
+                    <img class="his_headimg" width="70" height="70" :src="item.hero" alt="">
                   </div>
-                </div>
-                <img class="his_info_dan" width="50" height="60" :src="item.gameLevel">
-                <div class="his_info_equipment">
-                  <p>
-                    <span class="equipment_txt">最终出装</span>
-                    <span class="equipment_time">{{item.gameTime}}</span>
-                  </p>
-                  <p class="equipment_imglist">
-                    <img width="50" height="50" :src="src" v-for="(src,srcIndex) in item.equipmentImglist"
-                      :key="srcIndex+'img'">
-                </div>
+                  <div class="his_info_m">
+                    <p>
+                      <span class="his_info_m_txt "
+                        :class="{'_faltxt':item.result != '胜利','_suctxt':item.result == '胜利'}">胜利</span>
+                      <span class="his_info_m_maptxt">{{item.type}}</span>
+                      <span class="his_info_m_timetxt">时长:<span class="gameduration">{{item.useTime}}</span>分钟</span>
+                    </p>
 
+                    <div style="width:250px;height: 25px;background-position:0 0;overflow: hidden;">
+                      <img class="hisdata" :src="item.kda" alt="">
+                    </div>
+                  </div>
+                  <img class="his_info_dan" width="50" height="60" :src="item.gameLevel">
+                  <div class="his_info_equipment">
+                    <p>
+                      <span class="equipment_txt">最终出装</span>
+                      <span class="equipment_time">{{item.gameTime}}</span>
+                    </p>
+                    <p class="equipment_imglist">
+                      <img width="50" height="50" :src="src" v-for="(src,srcIndex) in item.equipmentImglist"
+                        :key="srcIndex+'img'">
+                  </div>
+
+                </div>
               </div>
-            </div>
-          </div>
 
+          </div>
+          <div class="isEnd" v-show="isEnd">数据已经全部加载完了啦~</div>
         </div>
         </div>
         <div class=" card card-empty noHonorofkings">

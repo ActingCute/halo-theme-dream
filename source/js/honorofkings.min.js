@@ -32,7 +32,7 @@ const initHonorofkingsVue = function () {
       queryParams: {
         //分页信息
         start: 0,
-        limit: 15,
+        limit: 10,
         hostname: hostname,
       },
       userInfo: {
@@ -55,6 +55,24 @@ const initHonorofkingsVue = function () {
     },
     created() {
       this.show = true;
+      // 滚动加载
+      window.addEventListener("scroll", () => {
+        let $honorofkingsGallery = $("#honorofkings");
+        if (
+          $honorofkingsGallery.length !== 0 &&
+          $(window).scrollTop() + $(window).height() >=
+            $honorofkingsGallery.height()
+        ) {
+          if (this.isEnd) {
+            $(".honorofkings").removeClass("loading");
+            this.isLoading = false;
+          }
+
+          if (this.isLoading || this.isEnd) return;
+          this.queryParams.start++;
+          this.getMore(this.queryParams);
+        }
+      });
     },
     mounted() {},
     methods: {
@@ -140,7 +158,7 @@ const initHonorofkingsVue = function () {
       },
       //初始化数据
       async init() {
-        console.log("init");
+        $(".noHonorofkings").show();
 
         //验证admin登陆
         let aa = localStorage.getItem("HALO__Access-Token");
@@ -184,10 +202,6 @@ const initHonorofkingsVue = function () {
               });
         }
 
-        $(".noHonorofkings").show();
-        this.sLoading = true;
-        $(".honorofkings").addClass("loading");
-
         axios
           .all([
             this.getRecordData(this.queryParams),
@@ -222,12 +236,16 @@ const initHonorofkingsVue = function () {
       },
       /* 获取王者荣耀战绩数据 */
       getRecordData(params) {
+        this.isLoading = true;
+        $(".honorofkings").addClass("loading");
         return axios.post(honorofkings_api + "/getRecord", params);
       },
       //获取更多
       async getMore(params) {
+        this.isLoading = true;
+        $(".honorofkings").addClass("loading");
         let recordData = await this.getRecordData(params);
-        this.setRecordData(recordData);
+        this.setRecordData(recordData.data);
       },
       //设置战绩显示
       setRecordData(recordData) {
@@ -235,12 +253,14 @@ const initHonorofkingsVue = function () {
         if (recordData.code == 10000) {
           const honorofkingsContents = recordData.data.data || [];
           if (honorofkingsContents.length != 0) {
-            this.isEnd = honorofkingsContents.length < this.queryParams.limit;
-            this.honorofkingsContents = honorofkingsContents;
+            this.isEnd =
+              this.honorofkingsContents.length >= recordData.data.total;
+            this.honorofkingsContents.push(...honorofkingsContents);
             $(".noHonorofkings").hide();
           } else {
             this.isEnd = true;
           }
+          this.isLoading = false;
         } else {
           console.error("获取王者战绩数据失败");
         }
