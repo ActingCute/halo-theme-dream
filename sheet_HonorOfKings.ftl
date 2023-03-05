@@ -33,13 +33,25 @@
           top: 20px;
         }
 
-        .honorofkingsContents .avatar {
+        .honorofkingsUserInfo .honorofkingsUserBox .avatarBox{
+          width:100%;
+          display:flex;
+          item-align:center;
+        }
+
+        .honorofkingsUserInfo .honorofkingsUserBox .avatarBox .avatar {
           width: 5rem;
           transition: all 2s;
           padding: 4px;
           background: var(--light-b);
           margin: 2em auto 0.5em auto;
-        }
+         }
+        
+        .honorofkingsUserInfo .honorofkingsUserBox .avatarBox .avatar1 {
+          width: 4.1rem;
+          transition: all 2s;
+           margin: 2em auto 0.5em auto;
+         }
 
         .honorofkingsContents {
           padding: 1rem;
@@ -82,7 +94,7 @@
             padding: 0
           }
         }
-
+        
         @media screen and (max-width: 375px) {
 
           .hisdata {
@@ -199,15 +211,16 @@
 
         /*弹窗*/
         .modal {}
+
+ 
       </style>
       <div class="honorofkings" id="honorofkings">
-
         <#-- 个人信息 -->
           <div class="card honorofkingsUserInfo widget is-not-hidden" id="profile">
             <div class="honorofkingsUserBox">
-              <figure class="image">
-                <img class="avatar" :src="userInfo.avatar" :alt="userInfo.name">
-              </figure>
+              <div class="avatarBox">
+                <img class="avatar " :src="userInfo.avatar" :alt="userInfo.name">
+              </div>
               <p class="honorofkingsUserName">
                 <span v-show="!viewRole"> {{userInfo.name}}</span>
                 <span v-if="isLogin">
@@ -247,14 +260,14 @@
                 </div>
                 <div class="honorofkingsUserItem">
                   <div class="honorofkingsUserItemTitle">段位</div>
-                  <div class="honorofkingsUserItemValue">{{userInfo.grade}} </div>
+                  <div class="honorofkingsUserItemValue">{{userInfo.grade == "荣耀王者"?"王者":userInfo.grade}} </div>
                 </div>
               </div>
             </div>
             <div class="honorofkingsUserBox">
-              <figure class="image">
-                <img class="avatar" :src="userInfo.gradeImg" :alt="userInfo.grade">
-              </figure>
+              <div class="avatarBox">
+                <img class="avatar1" :src="userInfo.gradeImg" :alt="userInfo.grade">
+              </div>
               <p class="honorofkingsUserName">{{userInfo.grade}}</p>
               <div class="honorofkingsUserItemBox" v-if="userInfo.ladderInfo && userInfo.ladderInfo.length == 2">
                 <div class="honorofkingsUserItem">
@@ -280,7 +293,7 @@
               </div>
             </div>
             <div class="honorofkingsUserItem">
-              <div class="honorofkingsUserItemTitle">信誉积分</div>
+              <div class="honorofkingsUserItemTitle">信誉积分6</div>
               <div class="honorofkingsUserItemValue">{{userInfo.credit}} </div>
             </div>
           </div>
