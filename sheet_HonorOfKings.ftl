@@ -57,7 +57,7 @@
           padding: 1rem;
         }
 
-        .isEnd{
+        .isEnd {
           text-align: center;
           margin-top: 1rem;
         }
@@ -170,6 +170,12 @@
           }
         }
 
+        @media screen and (max-width: 450px) {
+          .equipment_time {
+            position: absolute;
+          }
+        }
+
         .honorofkings {
           display: none;
         }
@@ -213,6 +219,8 @@
         .honorofkingsContentsItem {
           position: relative;
         }
+
+
 
         /*弹窗*/
         .modal {}
@@ -320,7 +328,7 @@
                       <span class="his_info_m_timetxt">时长:<span class="gameduration">{{item.useTime}}</span>分钟</span>
                     </p>
 
-                    <div style="width:250px;height: 25px;background-position:0 0;overflow: hidden;">
+                    <div style="width:250px;height: 25px;background-position:0 0;overflow: hidden;" v-if="item.kda">
                       <img class="hisdata" :src="item.kda" alt="">
                     </div>
                   </div>
