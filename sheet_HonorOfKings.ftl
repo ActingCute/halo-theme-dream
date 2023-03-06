@@ -315,7 +315,7 @@
                   <div class="his_info_m">
                     <p>
                       <span class="his_info_m_txt "
-                        :class="{'_faltxt':item.result != '胜利','_suctxt':item.result == '胜利'}">胜利</span>
+                        :class="{'_faltxt':item.result != '胜利','_suctxt':item.result == '胜利'}">{{item.result||'失败'}}</span>
                       <span class="his_info_m_maptxt">{{item.type}}</span>
                       <span class="his_info_m_timetxt">时长:<span class="gameduration">{{item.useTime}}</span>分钟</span>
                     </p>
