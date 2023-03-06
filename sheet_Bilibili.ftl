@@ -125,6 +125,7 @@
       }
 
       .watched_progress_text1 {
+        z-index:10
        }
 
       @media (max-width: 750px) {
