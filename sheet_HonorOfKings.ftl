@@ -296,7 +296,7 @@
               </div>
             </div>
             <div class="honorofkingsUserItem">
-              <div class="honorofkingsUserItemTitle">信誉积分6</div>
+              <div class="honorofkingsUserItemTitle">信誉积分</div>
               <div class="honorofkingsUserItemValue">{{userInfo.credit}} </div>
             </div>
           </div>
